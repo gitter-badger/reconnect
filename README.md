@@ -5,10 +5,10 @@ Version avaible:
 
 iOS:
 
-Objective-C
+-Objective-C
 
 Android:
 
-Android API
+-Android API
 
 

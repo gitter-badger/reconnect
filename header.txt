@@ -1,0 +1,14 @@
+POST /verifica.php HTTP/1.1
+
+Host: 192.168.35.1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:41.0) Gecko/20100101 Firefox/41.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+DNT: 1
+Referer: http://192.168.35.1/login.php?redirect=http://sp.senac.br
+Connection: keep-alive
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 205
+
+user="username"&pass="senhapadrão"&termo=on&mode_login.x=28&mode_login.y=15&redirect=http%3A%2F%2Fsp.senac.br&mac=%24mac&token=%24token&redirect=%24redirect&gateway=%24gateway&timeout=%24timeout

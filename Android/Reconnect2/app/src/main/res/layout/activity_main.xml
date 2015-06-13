@@ -61,9 +61,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Configuracao"
-            android:id="@+id/button2"
+            android:id="@+id/button_configuration"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin" />
     </RelativeLayout>
 
 </RelativeLayout>

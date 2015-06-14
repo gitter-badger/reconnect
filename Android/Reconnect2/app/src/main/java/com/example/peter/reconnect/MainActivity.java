@@ -1,8 +1,10 @@
 package com.example.peter.reconnect;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +24,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
+                //conectando a tela de configuracao com o botao
                 Intent configTela =  new Intent(MainActivity.this, Configuration.class);
                 startActivity(configTela);
 
@@ -51,5 +54,29 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //configurando o Back-Key:
+    //Funcionalidade do Back Key
+   // Do ponto de vista técnico, o botão voltar manipula a pilha de Activities do aplicativo.
+   // Pressionando o Back Key você finaliza a Activity atual e a remove da pilha. Se o aplicativo tiver apenas uma Activity
+   // ou a Activity atual é a única na pilha (o usuário fechou todos as outras) o botão voltar vai fechar o aplicativo.
+
+   @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Sair?");
+        builder.setMessage("Deseja realmente sair?");
+        builder.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                finish();
+            }
+        });
+        builder.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+            }
+        });
+        AlertDialog alerta = builder.create();
+        alerta.show();
     }
 }

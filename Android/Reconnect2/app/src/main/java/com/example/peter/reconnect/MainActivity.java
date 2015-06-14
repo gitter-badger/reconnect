@@ -10,9 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-
 public class MainActivity extends ActionBarActivity {
-    Button  button_configuration;
+    private Button  button_configuration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,16 +22,12 @@ public class MainActivity extends ActionBarActivity {
         button_configuration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 //conectando a tela de configuracao com o botao
                 Intent configTela =  new Intent(MainActivity.this, Configuration.class);
                 startActivity(configTela);
-
-
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

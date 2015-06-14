@@ -9,7 +9,7 @@ import android.widget.Button;
  * Created by Peter on 13/06/15.
  */
 public class Configuration extends ActionBarActivity {
-Button backHome;
+    private Button backHome;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,8 +19,6 @@ Button backHome;
             @Override
             public void onClick(View v) {
             finish();
-
-
             }
         });
     }

@@ -17,6 +17,8 @@ public class Configuration extends ActionBarActivity {
      private EditText editUserName,editUserPassword;
     private CheckBox checkBoxAgree;
     private SharedPreferences sharedPreferences ;
+    boolean passValid = false;
+    boolean userValid =false;
 
 
     @Override
@@ -24,13 +26,36 @@ public class Configuration extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+            userValid =false;
+        passValid=false;
+
+        final ValidationEditText validation = new ValidationEditText();
         loaderPreferences();
 
         saveProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                savePreferences();
-                finish();
+
+                final String email = editUserName.getText().toString();
+                if (!validation.isValidEmail(email)) {
+                    editUserName.setError("E-mail Invalido");
+
+                }   else {
+                    userValid = true;
+                }
+
+                /*final String pass = editUserPassword.getText().toString();
+                if (!validation.isValidPassword(pass)) {
+                    editUserPassword.setError("Invalid Password");
+
+                } else{
+                    passValid = true;
+                }*/
+
+                if (passValid ==true && userValid ==true){
+                    savePreferences();
+                    finish();
+                }
 
             }
         });

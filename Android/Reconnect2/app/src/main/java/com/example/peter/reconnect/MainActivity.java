@@ -16,15 +16,6 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       /* button_configuration = (Button) findViewById(R.id.button_configuration);
-        button_configuration.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //conectando a tela de configuracao com o botao
-                Intent configTela =  new Intent(MainActivity.this, Configuration.class);
-                startActivity(configTela);
-            }
-        });*/
     }
 
     @Override

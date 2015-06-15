@@ -2,16 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#00ffbd" >
-
-    <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_signal_wifi_4_bar_black_24dp"
-        android:tileMode="repeat"
-        android:layout_centerInParent="true"
-        android:contentDescription="logo" />
+    android:background="#3F51B5" >
 
     <TextView
         android:layout_width="fill_parent"
@@ -20,7 +11,7 @@
         android:layout_marginBottom="10dp"
         android:gravity="center_horizontal"
         android:text="@string/footer"
-        android:textColor="#e9000000"
+        android:textColor="#E8EAF6"
         android:textSize="@dimen/abc_text_size_medium_material" />
 
 </RelativeLayout>

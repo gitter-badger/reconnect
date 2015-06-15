@@ -7,18 +7,16 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 public class MainActivity extends ActionBarActivity {
-    private Button  button_configuration;
+   // private Button  button_configuration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button_configuration = (Button) findViewById(R.id.button_configuration);
+       /* button_configuration = (Button) findViewById(R.id.button_configuration);
         button_configuration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -26,7 +24,7 @@ public class MainActivity extends ActionBarActivity {
                 Intent configTela =  new Intent(MainActivity.this, Configuration.class);
                 startActivity(configTela);
             }
-        });
+        });*/
     }
 
     @Override
@@ -45,6 +43,8 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent configTela =  new Intent(MainActivity.this, Configuration.class);
+            startActivity(configTela);
             return true;
         }
 

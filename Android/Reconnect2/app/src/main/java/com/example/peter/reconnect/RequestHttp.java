@@ -19,7 +19,7 @@ import java.util.List;
 public class RequestHttp {
     private static final String IP = "192.168.35.1/verifica.php";
 
-    // Este método consiste em enviar um comando POST para o servidor do Senac permitindo o usuário logar-se na rede Wifi
+    // Este metodo consiste em enviar um comando POST para o servidor do Senac permitindo o usuï¿½rio logar-se na rede Wifi
     public static HttpResponse clientHTTP(String username, String passwd, boolean termo){
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(IP);

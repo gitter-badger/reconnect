@@ -16,17 +16,6 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Configuracao"
-            android:id="@+id/button_configuration"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin" />
-
         <ToggleButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Offline"
+            android:text="Sua internet esta Offline"
             android:id="@+id/textView"
             android:layout_gravity="center_horizontal"
             android:textColor="#ff1ebbf5"

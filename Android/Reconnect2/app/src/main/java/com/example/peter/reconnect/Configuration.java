@@ -52,7 +52,7 @@ public class Configuration extends ActionBarActivity {
                     passValid = true;
                 }*/
 
-                if (passValid){
+                if (userValid){
                     savePreferences();
                     finish();
                 }

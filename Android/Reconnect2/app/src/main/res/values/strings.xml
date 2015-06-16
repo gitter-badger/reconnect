@@ -21,6 +21,12 @@
     <string name="invalid_username" >E-mail Invalido</string>
 
 
+    <string name="action_about">Sobre</string>
+    <string name="action_feedback">Fale Conosco</string>
+
+
+
+
     <string name="title_button_dialog">Ok</string>
     <string name="alert_dialog">Alerta</string>
     <string name="message_dialog">Opa, voce precisa aceitar o termo do login</string>
@@ -28,6 +34,7 @@
     <string name="internet_online">Voce esta logado na internet</string>
     <string name="internet_offline">Voce nao tem acceso a internet</string>
     <string name="internet_state">Verificando internet...</string>
+    <string name="agree_errror">Precisa aceitar termo</string>
 
 
 </resources>

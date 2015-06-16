@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -48,12 +50,16 @@ public class Configuration extends ActionBarActivity {
      * particular Activity
      */
     protected void setupActionBar() {
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
         final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
+
     }
 
     @Override
@@ -121,7 +127,8 @@ public class Configuration extends ActionBarActivity {
                 final boolean agreeTerm = checkBoxAgree.isChecked();
 
                 if (!agreeTerm) {
-                    buildDialogOneButton(getString(R.string.alert_dialog), getString(R.string.message_dialog), getString(R.string.title_button_dialog));
+                     checkBoxAgree.setError(getString(R.string.agree_errror));
+                   // buildDialogOneButton(getString(R.string.alert_dialog), getString(R.string.message_dialog), getString(R.string.title_button_dialog));
                     return;
                 }
 

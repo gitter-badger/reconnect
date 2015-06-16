@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends ActionBarActivity {
-   // private Button  button_configuration;
+    // private Button  button_configuration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent configTela =  new Intent(MainActivity.this, Configuration.class);
+            Intent configTela = new Intent(MainActivity.this, Configuration.class);
             startActivity(configTela);
             return true;
         }
@@ -44,11 +44,11 @@ public class MainActivity extends ActionBarActivity {
 
     //configurando o Back-Key:
     //Funcionalidade do Back Key
-   // Do ponto de vista técnico, o botão voltar manipula a pilha de Activities do aplicativo.
-   // Pressionando o Back Key você finaliza a Activity atual e a remove da pilha. Se o aplicativo tiver apenas uma Activity
-   // ou a Activity atual é a única na pilha (o usuário fechou todos as outras) o botão voltar vai fechar o aplicativo.
+    // Do ponto de vista técnico, o botão voltar manipula a pilha de Activities do aplicativo.
+    // Pressionando o Back Key você finaliza a Activity atual e a remove da pilha. Se o aplicativo tiver apenas uma Activity
+    // ou a Activity atual é a única na pilha (o usuário fechou todos as outras) o botão voltar vai fechar o aplicativo.
 
-   @Override
+    @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Sair?");

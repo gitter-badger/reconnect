@@ -1,6 +1,8 @@
 package com.example.peter.reconnect;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -14,11 +16,11 @@ import android.widget.EditText;
  */
 public class Configuration extends ActionBarActivity {
     private Button saveProfile;
-     private EditText editUserName,editUserPassword;
+    private EditText editUserName, editUserPassword;
     private CheckBox checkBoxAgree;
-    private SharedPreferences sharedPreferences ;
+    private SharedPreferences sharedPreferences;
     boolean passValid = false;
-    boolean userValid =false;
+    boolean userValid = false;
 
 
     @Override
@@ -26,40 +28,79 @@ public class Configuration extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-            userValid =false;
-        passValid=false;
+        userValid = false;
+        passValid = false;
 
         final ValidationEditText validation = new ValidationEditText();
+        //carregando preferencias do usuario
         loaderPreferences();
 
+        //validando dados inseridos
+        validationEditText(validation);
+
+
+    }
+
+    private void buildDialogOneButton(String titulo, String message, String button) {
+        AlertDialog alertDialog = new AlertDialog.Builder(
+                Configuration.this).create();
+
+        // Setting Dialog Title
+        alertDialog.setTitle(titulo);
+
+        // Setting Dialog Message
+        alertDialog.setMessage(message);
+
+        // Setting Icon to Dialog
+        alertDialog.setIcon(R.drawable.ic_phonelink_ring_black_24dp);
+
+        // Setting OK Button
+        alertDialog.setButton(button, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // Write your code here to execute after dialog closed
+            }
+        });
+
+        // Showing Alert Message
+        alertDialog.show();
+    }
+
+    private void validationEditText(final ValidationEditText validation) {
         saveProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 final String email = editUserName.getText().toString();
                 if (!validation.isValidEmail(email)) {
-                    editUserName.setError("E-mail Invalido");
+                    editUserName.setError(getString(R.string.invalid_username));
 
-                }   else {
+                } else {
                     userValid = true;
                 }
 
-                /*final String pass = editUserPassword.getText().toString();
-                if (!validation.isValidPassword(pass)) {
-                    editUserPassword.setError("Invalid Password");
+                final String pass = editUserPassword.getText().toString();
+                if (!validation.lentghIsValidPassword(pass)) {
+                    editUserPassword.setError(getString(R.string.invalid_password));
 
-                } else{
+                } else {
                     passValid = true;
-                }*/
+                }
+                final boolean agreeTerm = checkBoxAgree.isChecked();
 
-                if (userValid){
-                    savePreferences();
-                    finish();
+                if (!agreeTerm) {
+                    buildDialogOneButton(getString(R.string.alert_dialog), getString(R.string.message_dialog), getString(R.string.title_button_dialog));
+                    return;
                 }
 
+                if (userValid && passValid) {
+                    //salvando preferencias
+                    savePreferences();
+                    //saindo da activity
+                    finish();
+                }
             }
-        });
 
+        });
     }
 
     private void savePreferences() {
@@ -72,8 +113,8 @@ public class Configuration extends ActionBarActivity {
         boolean checkBoxInput = checkBoxAgree.isChecked();
 
         editor.putString(getString(R.string.key_user_name), nameInput);
-        editor.putString(getString(R.string.key_user_password),passwordInput);
-        editor.putBoolean(getString(R.string.key_user_termo),checkBoxInput);
+        editor.putString(getString(R.string.key_user_password), passwordInput);
+        editor.putBoolean(getString(R.string.key_user_agree), checkBoxInput);
         editor.commit();
     }
 
@@ -84,13 +125,13 @@ public class Configuration extends ActionBarActivity {
 
         saveProfile = (Button) findViewById(R.id.button_back);
         editUserName = (EditText) findViewById(R.id.editUser);
-        editUserPassword =(EditText) findViewById(R.id.editPassword);
+        editUserPassword = (EditText) findViewById(R.id.editPassword);
         checkBoxAgree = (CheckBox) findViewById(R.id.checkBoxTermo);
 
 
         editUserName.setText(sharedPreferences.getString(getString(R.string.key_user_name), ""));
-        editUserPassword.setText(sharedPreferences.getString(getString(R.string.key_user_password),""));
-        checkBoxAgree.setChecked(sharedPreferences.getBoolean(getString(R.string.key_user_termo),false));
+        editUserPassword.setText(sharedPreferences.getString(getString(R.string.key_user_password), ""));
+        checkBoxAgree.setChecked(sharedPreferences.getBoolean(getString(R.string.key_user_agree), false));
     }
 
 

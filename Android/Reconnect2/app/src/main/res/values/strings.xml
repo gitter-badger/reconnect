@@ -12,11 +12,18 @@
     <string name="preference_file_key">com.example.reconnect.PREFERENCE_RECONNECT_KEY</string>
     <string name="key_user_name">nameKey</string>
     <string name="key_user_password">passwordKey</string>
-    <string name="key_user_termo">agreeKey</string>
+    <string name="key_user_agree">agreeKey</string>
     <string name="account_title">Conta</string>
     <string name="save_profile">Salvar Perfil</string>
     <string name="agree_text">Aceitar Termo</string>
     <string name="user_title">Usuario</string>
+    <string name="invalid_password">Precisa inserir uma senha</string>
+    <string name="invalid_username" >E-mail Invalido</string>
+
+
+    <string name="title_button_dialog">Ok</string>
+    <string name="alert_dialog">Alerta</string>
+    <string name="message_dialog">Opa, voce precisa aceitar o termo do login</string>
 
 
 </resources>

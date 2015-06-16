@@ -20,7 +20,7 @@ public class RequestHttp {
     private static final String IP = "192.168.35.1/verifica.php";
 
     // Este metodo consiste em enviar um comando POST para o servidor do Senac permitindo o usu�rio logar-se na rede Wifi
-    public static HttpResponse clientHTTP(String username, String passwd, boolean termo){
+    public static HttpResponse clientHTTP(String username, String passwd, boolean termo) {
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(IP);
         HttpResponse response = null;
@@ -28,10 +28,9 @@ public class RequestHttp {
 
         pairs.add(new BasicNameValuePair("user", username));
         pairs.add(new BasicNameValuePair("pass", passwd));
-        if(termo){
+        if (termo) {
             pairs.add(new BasicNameValuePair("termo", "on"));
-        }
-        else{
+        } else {
             pairs.add(new BasicNameValuePair("termo", "off"));
         }
         pairs.add(new BasicNameValuePair("mode_login.x", "0"));

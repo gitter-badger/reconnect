@@ -4,38 +4,40 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/account_title"
-        android:id="@+id/textView"
-        android:textColor="#00b2ff"
-        android:textSize="20sp"
-        android:layout_below="@+id/textview"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:background="#3F51B5">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save_profile"
-        android:drawableLeft="@drawable/ic_account_circle_black_24dp"
+        android:drawableLeft="@drawable/ic_account_circle_white_36dp"
         android:id="@+id/button_back"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="83dp"
         android:background="#FF4081"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:textAlignment="center" />
 
-    <TextView android:text="@string/configuration_titlle" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textview"
-        android:textSize="35sp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textColor="#E0E0E0" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:layout_above="@+id/editPassword">
+
+        <TextView android:text="@string/configuration_titlle" android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview"
+            android:textSize="35sp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="#ffffff"
+            android:autoText="false"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
 
     <EditText
         android:layout_width="wrap_content"
@@ -43,15 +45,19 @@
         android:id="@+id/editUser"
         android:hint="@string/user_name"
         android:focusable="true"
-        android:textColorHighlight="#ff7eff15"
-        android:textColorHint="#ffff25e6"
-        android:layout_marginTop="46dp"
+        android:textColorHighlight="#FF4081"
+        android:textColorHint="#FF4081"
+        android:inputType="textEmailAddress"
+        android:textColor="#ffffff"
+        android:textIsSelectable="false"
+        android:autoText="false"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:layout_above="@+id/checkBoxTermo"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/textView"
-        android:inputType="textEmailAddress" />
+        android:layout_alignRight="@+id/editPassword"
+        android:layout_alignEnd="@+id/editPassword" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -59,13 +65,17 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/editPassword"
-        android:layout_below="@+id/editUser"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/editUser"
-        android:layout_alignEnd="@+id/editUser"
-        android:textColorHint="#ffff299f"
-        android:hint="@string/user_password" />
+        android:textColorHint="#FF4081"
+        android:hint="@string/user_password"
+        android:textColor="#ffffff"
+        android:textColorHighlight="#FF4081"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:layout_above="@+id/editUser"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -77,6 +87,11 @@
         android:gravity="center_vertical"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="#ffffff"
+        android:buttonTint="#FF4081"
+
+        android:textSize="@dimen/abc_text_size_menu_material"
+        android:textColorHint="#FF4081" />
 
 </RelativeLayout>

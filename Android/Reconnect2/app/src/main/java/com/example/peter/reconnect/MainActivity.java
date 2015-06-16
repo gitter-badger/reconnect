@@ -1,21 +1,81 @@
 package com.example.peter.reconnect;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
     // private Button  button_configuration;
+    private TextView internet_message;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        internet_message = (TextView) findViewById(R.id.text_is_connected);
+
+        ConnectivityManager cm =
+                (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+
+        if (isConnected) {
+            internet_message.setText(getString(R.string.internet_online));
+        }
+        if (!isConnected) {
+            internet_message.setText(getString(R.string.internet_offline));
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        internet_message = (TextView) findViewById(R.id.text_is_connected);
+
+        ConnectivityManager cm =
+                (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+
+        if (isConnected) {
+            internet_message.setText(getString(R.string.internet_online));
+        }
+        if (!isConnected) {
+            internet_message.setText(getString(R.string.internet_offline));
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        internet_message = (TextView) findViewById(R.id.text_is_connected);
+
+        ConnectivityManager cm =
+                (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+
+        if (isConnected) {
+            internet_message.setText(getString(R.string.internet_online));
+        }
+        if (!isConnected) {
+            internet_message.setText(getString(R.string.internet_offline));
+        }
     }
 
     @Override
@@ -38,6 +98,7 @@ public class MainActivity extends ActionBarActivity {
             startActivity(configTela);
             return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }

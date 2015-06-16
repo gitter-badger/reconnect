@@ -4,7 +4,7 @@
     <string name="app_name">Reconnect</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Configuração</string>
-    <string name="configuration_titlle">Meu Perfil</string>
+    <string name="configuration_titlle">Meu Login</string>
     <string name="user_name">E-mail</string>
     <string name="user_password">Senha</string>
     <string name="footer"> Copyright \u00A9 Reconnect 2015</string>
@@ -24,6 +24,10 @@
     <string name="title_button_dialog">Ok</string>
     <string name="alert_dialog">Alerta</string>
     <string name="message_dialog">Opa, voce precisa aceitar o termo do login</string>
+
+    <string name="internet_online">Voce esta logado na internet</string>
+    <string name="internet_offline">Voce nao tem acceso a internet</string>
+    <string name="internet_state">Verificando internet...</string>
 
 
 </resources>

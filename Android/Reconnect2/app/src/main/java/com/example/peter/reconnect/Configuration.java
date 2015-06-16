@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -27,19 +28,51 @@ public class Configuration extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-
-        userValid = false;
-        passValid = false;
-
+        //setando configuracao do action bar
+        setupActionBar();
         final ValidationEditText validation = new ValidationEditText();
+
         //carregando preferencias do usuario
         loaderPreferences();
 
         //validando dados inseridos
         validationEditText(validation);
 
-
     }
+
+
+    /**
+     * This method will setup the top title bar (Action bar) content and display
+     * values. It will also setup the custom background theme for ActionBar. You
+     * can override this method to change the behavior of ActionBar for
+     * particular Activity
+     */
+    protected void setupActionBar() {
+
+        final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == android.R.id.home) {
+            finish();
+            return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     private void buildDialogOneButton(String titulo, String message, String button) {
         AlertDialog alertDialog = new AlertDialog.Builder(

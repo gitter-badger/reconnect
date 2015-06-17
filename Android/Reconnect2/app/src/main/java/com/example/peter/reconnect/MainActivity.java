@@ -94,8 +94,19 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent configTela = new Intent(MainActivity.this, Configuration.class);
-            startActivity(configTela);
+            Intent configIntent = new Intent(MainActivity.this, Configuration.class);
+            startActivity(configIntent);
+            return true;
+        }
+        if (id == R.id.action_about) {
+            Intent aboutIntent = new Intent(MainActivity.this, AboutApp.class);
+            startActivity(aboutIntent);
+            return true;
+        }
+        if (id == R.id.action_feedback) {
+
+            Intent sendFeeback = new Intent(MainActivity.this, SendMail.class);
+            startActivity(sendFeeback);
             return true;
         }
 

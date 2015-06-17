@@ -16,6 +16,15 @@ public class MainActivity extends ActionBarActivity {
     // private Button  button_configuration;
     private TextView internet_message;
 
+    private void isConnected(boolean isConnected){
+        if (isConnected) {
+            internet_message.setText(getString(R.string.internet_online));
+        }
+        if (!isConnected) {
+            internet_message.setText(getString(R.string.internet_offline));
+        }
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -25,15 +34,8 @@ public class MainActivity extends ActionBarActivity {
                 (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null &&
-                activeNetwork.isConnectedOrConnecting();
-
-        if (isConnected) {
-            internet_message.setText(getString(R.string.internet_online));
-        }
-        if (!isConnected) {
-            internet_message.setText(getString(R.string.internet_offline));
-        }
+        //boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        isConnected(activeNetwork != null && activeNetwork.isConnectedOrConnecting());
     }
 
     @Override
@@ -45,15 +47,8 @@ public class MainActivity extends ActionBarActivity {
                 (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null &&
-                activeNetwork.isConnectedOrConnecting();
-
-        if (isConnected) {
-            internet_message.setText(getString(R.string.internet_online));
-        }
-        if (!isConnected) {
-            internet_message.setText(getString(R.string.internet_offline));
-        }
+        //boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        isConnected(activeNetwork != null && activeNetwork.isConnectedOrConnecting());
     }
 
     @Override
@@ -67,15 +62,8 @@ public class MainActivity extends ActionBarActivity {
                 (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null &&
-                activeNetwork.isConnectedOrConnecting();
-
-        if (isConnected) {
-            internet_message.setText(getString(R.string.internet_online));
-        }
-        if (!isConnected) {
-            internet_message.setText(getString(R.string.internet_offline));
-        }
+        //boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        isConnected(activeNetwork != null && activeNetwork.isConnectedOrConnecting());
     }
 
     @Override
@@ -90,9 +78,23 @@ public class MainActivity extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        //int id = item.getItemId();
+        switch (item.getItemId()){
+            case R.id.action_settings:
+                Intent configIntent = new Intent(MainActivity.this, ConfigurationActivity.class);
+                startActivity(configIntent);
+                return true;
+            case R.id.action_about:
+                Intent aboutIntent = new Intent(MainActivity.this, AboutAppActivity.class);
+                startActivity(aboutIntent);
+                return true;
+            case R.id.action_feedback:
+                Intent sendFeeback = new Intent(MainActivity.this, SendEmailActivity.class);
+                startActivity(sendFeeback);
+                return true;
+        }
 
-        //noinspection SimplifiableIfStatement
+        /*//noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Intent configIntent = new Intent(MainActivity.this, ConfigurationActivity.class);
             startActivity(configIntent);
@@ -104,12 +106,10 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
         if (id == R.id.action_feedback) {
-
             Intent sendFeeback = new Intent(MainActivity.this, SendEmailActivity.class);
             startActivity(sendFeeback);
             return true;
-        }
-
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -131,8 +131,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
         builder.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface arg0, int arg1) {
-            }
+            public void onClick(DialogInterface arg0, int arg1) {}
         });
         AlertDialog alerta = builder.create();
         alerta.show();

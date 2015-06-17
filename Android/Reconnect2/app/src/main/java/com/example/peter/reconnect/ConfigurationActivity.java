@@ -17,7 +17,7 @@ import android.widget.EditText;
 /**
  * Created by Peter on 13/06/15.
  */
-public class Configuration extends ActionBarActivity {
+public class ConfigurationActivity extends ActionBarActivity {
     private Button saveProfile;
     private EditText editUserName, editUserPassword;
     private CheckBox checkBoxAgree;
@@ -82,7 +82,7 @@ public class Configuration extends ActionBarActivity {
 
     private void buildDialogOneButton(String titulo, String message, String button) {
         AlertDialog alertDialog = new AlertDialog.Builder(
-                Configuration.this).create();
+                ConfigurationActivity.this).create();
 
         // Setting Dialog Title
         alertDialog.setTitle(titulo);

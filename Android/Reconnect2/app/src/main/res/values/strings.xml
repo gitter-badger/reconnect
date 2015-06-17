@@ -23,7 +23,7 @@
 
     <string name="action_about">Sobre</string>
     <string name="action_feedback">Fale Conosco</string>
-<string name="about_title">Sobre nos</string>
+<string name="about_title">Sobre</string>
 
 
 
@@ -31,8 +31,8 @@
     <string name="alert_dialog">Alerta</string>
     <string name="message_dialog">Opa, voce precisa aceitar o termo do login</string>
 
-    <string name="internet_online">Voce esta logado na internet</string>
-    <string name="internet_offline">Voce nao tem acceso a internet</string>
+    <string name="internet_online">ONLINE</string>
+    <string name="internet_offline">OFFLINE</string>
     <string name="internet_state">Verificando internet...</string>
     <string name="agree_errror">Precisa aceitar termo</string>
     <string name="sendMail_label">Enviar Feedback</string>

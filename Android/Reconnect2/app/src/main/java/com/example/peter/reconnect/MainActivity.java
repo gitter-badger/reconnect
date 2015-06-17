@@ -94,18 +94,18 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent configIntent = new Intent(MainActivity.this, Configuration.class);
+            Intent configIntent = new Intent(MainActivity.this, ConfigurationActivity.class);
             startActivity(configIntent);
             return true;
         }
         if (id == R.id.action_about) {
-            Intent aboutIntent = new Intent(MainActivity.this, AboutApp.class);
+            Intent aboutIntent = new Intent(MainActivity.this, AboutAppActivity.class);
             startActivity(aboutIntent);
             return true;
         }
         if (id == R.id.action_feedback) {
 
-            Intent sendFeeback = new Intent(MainActivity.this, SendMail.class);
+            Intent sendFeeback = new Intent(MainActivity.this, SendEmailActivity.class);
             startActivity(sendFeeback);
             return true;
         }

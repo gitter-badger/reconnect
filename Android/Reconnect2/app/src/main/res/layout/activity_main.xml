@@ -30,7 +30,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="63dp"
             android:layout_above="@+id/toggleButton"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:textColor="#000000" />
 
     </RelativeLayout>
 

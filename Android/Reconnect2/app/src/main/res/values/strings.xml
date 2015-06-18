@@ -4,7 +4,7 @@
     <string name="app_name">Reconnect</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Configuração</string>
-    <string name="configuration_titlle">Meu Login</string>
+    <string name="configuration_titlle">Login</string>
     <string name="user_name">E-mail</string>
     <string name="user_password">Senha</string>
     <string name="footer"> Copyright \u00A9 Reconnect 2015</string>

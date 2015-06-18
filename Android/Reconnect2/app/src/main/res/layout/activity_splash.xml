@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#3F51B5" >
+    android:background="@color/indigo_500" >
 
     <TextView
         android:layout_width="fill_parent"

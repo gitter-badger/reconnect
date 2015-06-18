@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.EditText;
 
 /**
@@ -43,23 +41,18 @@ public class SendEmailActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-
             finish();
-
             return true;
         }
         if (id == R.id.action_send_email) {
             sendEmail();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
     protected void setupActionBar() {
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
         final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayUseLogoEnabled(true);

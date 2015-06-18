@@ -45,6 +45,11 @@
         <activity
             android:name=".SendEmailActivity"
             android:label="@string/sendMail_label"></activity>
+        <activity
+            android:name=".NotificationActivity"
+            android:label="@string/action_notifications">
+
+        </activity>
     </application>
 
 

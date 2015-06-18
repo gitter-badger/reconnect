@@ -9,8 +9,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -24,6 +22,7 @@ public class ConfigurationActivity extends ActionBarActivity {
     private EditText editUserName, editUserPassword;
     private CheckBox checkBoxAgree;
     private SharedPreferences sharedPreferences;
+    private ValidationEditText validation;
     boolean passValid = false;
     boolean userValid = false;
 
@@ -32,9 +31,14 @@ public class ConfigurationActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        saveProfile = (ImageButton) findViewById(R.id.button_back);
+        editUserName = (EditText) findViewById(R.id.editUser);
+        editUserPassword = (EditText) findViewById(R.id.editPassword);
+        checkBoxAgree = (CheckBox) findViewById(R.id.checkBoxTermo);
+
         //setando configuracao do action bar
         setupActionBar();
-        final ValidationEditText validation = new ValidationEditText();
+        validation = new ValidationEditText();
 
         //carregando preferencias do usuario
         loaderPreferences();
@@ -52,16 +56,11 @@ public class ConfigurationActivity extends ActionBarActivity {
      * particular Activity
      */
     protected void setupActionBar() {
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
         final ActionBar actionBar = getSupportActionBar();
 
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setNavigationMode(actionBar.NAVIGATION_MODE_STANDARD);
-
-
         //setando logotipo do app
         // getSupportActionBar().setDisplayShowHomeEnabled(true);
         //    getSupportActionBar().setLogo(R.drawable.icon);
@@ -148,6 +147,8 @@ public class ConfigurationActivity extends ActionBarActivity {
                     savePreferences();
                     //saindo da activity
                     finish();
+                    Toast.makeText(getApplicationContext(),
+                            "Atualizando login", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -167,8 +168,7 @@ public class ConfigurationActivity extends ActionBarActivity {
         editor.putString(getString(R.string.key_user_password), passwordInput);
         editor.putBoolean(getString(R.string.key_user_agree), checkBoxInput);
         editor.commit();
-        Toast.makeText(getApplicationContext(),
-                "Atualizando login", Toast.LENGTH_LONG).show();
+
     }
 
     private void loaderPreferences() {
@@ -176,10 +176,7 @@ public class ConfigurationActivity extends ActionBarActivity {
         sharedPreferences = getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
-        saveProfile = (ImageButton) findViewById(R.id.button_back);
-        editUserName = (EditText) findViewById(R.id.editUser);
-        editUserPassword = (EditText) findViewById(R.id.editPassword);
-        checkBoxAgree = (CheckBox) findViewById(R.id.checkBoxTermo);
+
 
 
         editUserName.setText(sharedPreferences.getString(getString(R.string.key_user_name), ""));

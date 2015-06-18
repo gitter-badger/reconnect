@@ -11,10 +11,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 public class MainActivity extends ActionBarActivity {
     // private Button  button_configuration;
     private TextView internet_message;
+    private ToggleButton buttonStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         internet_message = (TextView) findViewById(R.id.text_is_connected);
+        buttonStart = (ToggleButton) findViewById(R.id.buttonStart);
 
         ConnectivityManager cm =
                 (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);

@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 /**
  * Created by Peter on 13/06/15.
@@ -166,6 +167,8 @@ public class ConfigurationActivity extends ActionBarActivity {
         editor.putString(getString(R.string.key_user_password), passwordInput);
         editor.putBoolean(getString(R.string.key_user_agree), checkBoxInput);
         editor.commit();
+        Toast.makeText(getApplicationContext(),
+                "Atualizando login", Toast.LENGTH_LONG).show();
     }
 
     private void loaderPreferences() {

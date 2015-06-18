@@ -3,11 +3,10 @@ package com.example.peter.reconnect;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 
 /**
@@ -15,11 +14,9 @@ import android.widget.EditText;
  */
 public class SendEmailActivity extends ActionBarActivity {
 
-    Button buttonSend;
     EditText textEmail;
     EditText textSubject;
     EditText textMessage;
-
 
 
     @Override
@@ -27,33 +24,18 @@ public class SendEmailActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_email);
         setupActionBar();
-        buttonSend = (Button) findViewById(R.id.buttonSendEmail);
-        textEmail = (EditText) findViewById(R.id.textEmail);
         textSubject = (EditText) findViewById(R.id.textSuject);
         textMessage = (EditText) findViewById(R.id.textMessageEmail);
 
-        buttonSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String to = textEmail.getText().toString();
-                String subject = textSubject.getText().toString();
-                String message = textMessage.getText().toString();
 
-                Intent email = new Intent(Intent.ACTION_SEND);
-                email.putExtra(Intent.EXTRA_EMAIL, new String[]{ to});
-                //email.putExtra(Intent.EXTRA_CC, new String[]{ to});
-                //email.putExtra(Intent.EXTRA_BCC, new String[]{to});
-                email.putExtra(Intent.EXTRA_SUBJECT, subject);
-                email.putExtra(Intent.EXTRA_TEXT, message);
+    }
 
-                //need this to prompts email client only
-                email.setType("message/rfc822");
 
-                startActivity(Intent.createChooser(email, "Choose an Email client :"));
-                finish();
-
-            }
-        });
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_send_email, menu);
+        return true;
     }
 
     @Override
@@ -66,7 +48,9 @@ public class SendEmailActivity extends ActionBarActivity {
 
             return true;
         }
-
+        if (id == R.id.action_send_email) {
+            sendEmail();
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -82,5 +66,24 @@ public class SendEmailActivity extends ActionBarActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
+    }
+
+    private void sendEmail() {
+        String to = getString(R.string.email_support);
+        String subject = textSubject.getText().toString();
+        String message = textMessage.getText().toString();
+
+        Intent email = new Intent(Intent.ACTION_SEND);
+        email.putExtra(Intent.EXTRA_EMAIL, new String[]{to});
+        //email.putExtra(Intent.EXTRA_CC, new String[]{ to});
+        //email.putExtra(Intent.EXTRA_BCC, new String[]{to});
+        email.putExtra(Intent.EXTRA_SUBJECT, subject);
+        email.putExtra(Intent.EXTRA_TEXT, message);
+
+        //need this to prompts email client only
+        email.setType("message/rfc822");
+
+        startActivity(Intent.createChooser(email, getResources().getText(R.string.send_choose)));
+        finish();
     }
 }

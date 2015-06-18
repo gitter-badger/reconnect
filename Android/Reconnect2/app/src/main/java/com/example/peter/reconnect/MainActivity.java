@@ -56,6 +56,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         internet_message = (TextView) findViewById(R.id.text_is_connected);
 
         ConnectivityManager cm =
@@ -80,7 +81,7 @@ public class MainActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         //int id = item.getItemId();
         switch (item.getItemId()){
-            case R.id.action_settings:
+            case R.id.action_account:
                 Intent configIntent = new Intent(MainActivity.this, ConfigurationActivity.class);
                 startActivity(configIntent);
                 return true;
@@ -136,4 +137,5 @@ public class MainActivity extends ActionBarActivity {
         AlertDialog alerta = builder.create();
         alerta.show();
     }
+
 }

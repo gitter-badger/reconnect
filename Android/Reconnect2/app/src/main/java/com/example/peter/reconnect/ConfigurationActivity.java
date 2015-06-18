@@ -5,20 +5,21 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 /**
  * Created by Peter on 13/06/15.
  */
 public class ConfigurationActivity extends ActionBarActivity {
-    private Button saveProfile;
+    private ImageButton saveProfile;
     private EditText editUserName, editUserPassword;
     private CheckBox checkBoxAgree;
     private SharedPreferences sharedPreferences;
@@ -54,8 +55,17 @@ public class ConfigurationActivity extends ActionBarActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-        final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        final ActionBar actionBar = getSupportActionBar();
+
         actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setNavigationMode(actionBar.NAVIGATION_MODE_STANDARD);
+
+
+        //setando logotipo do app
+        // getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //    getSupportActionBar().setLogo(R.drawable.icon);
+        //  getSupportActionBar().setDisplayUseLogoEnabled(true);
+
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -91,7 +101,7 @@ public class ConfigurationActivity extends ActionBarActivity {
         alertDialog.setMessage(message);
 
         // Setting Icon to Dialog
-        alertDialog.setIcon(R.drawable.ic_phonelink_ring_black_24dp);
+        alertDialog.setIcon(R.drawable.icon);
 
         // Setting OK Button
         alertDialog.setButton(button, new DialogInterface.OnClickListener() {
@@ -127,8 +137,8 @@ public class ConfigurationActivity extends ActionBarActivity {
                 final boolean agreeTerm = checkBoxAgree.isChecked();
 
                 if (!agreeTerm) {
-                     checkBoxAgree.setError(getString(R.string.agree_errror));
-                   // buildDialogOneButton(getString(R.string.alert_dialog), getString(R.string.message_dialog), getString(R.string.title_button_dialog));
+                    checkBoxAgree.setError(getString(R.string.agree_errror));
+                    // buildDialogOneButton(getString(R.string.alert_dialog), getString(R.string.message_dialog), getString(R.string.title_button_dialog));
                     return;
                 }
 
@@ -163,7 +173,7 @@ public class ConfigurationActivity extends ActionBarActivity {
         sharedPreferences = getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
-        saveProfile = (Button) findViewById(R.id.button_back);
+        saveProfile = (ImageButton) findViewById(R.id.button_back);
         editUserName = (EditText) findViewById(R.id.editUser);
         editUserPassword = (EditText) findViewById(R.id.editPassword);
         checkBoxAgree = (CheckBox) findViewById(R.id.checkBoxTermo);

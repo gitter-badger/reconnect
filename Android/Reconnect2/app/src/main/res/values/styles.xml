@@ -5,14 +5,14 @@
         <!-- Customize your theme here. -->
         <item name="android:actionBarStyle">@style/MyActionBar</item>
         <item name="android:colorPrimaryDark" tools:targetApi="lollipop">@color/indigo_700</item>
-          <!-- Support library compatibility -->
+        <!-- Support library compatibility -->
         <item name="actionBarStyle">@style/MyActionBar</item>
 
     </style>
     <!-- ActionBar styles -->
-    <style name="MyActionBar"
-        parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+    <style name="MyActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@color/indigo_500</item>
+
 
         <!-- Support library compatibility -->
         <item name="background">@color/indigo_500</item>

@@ -1,135 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
-    android:background="#ffffff">
+    tools:context=".MainActivity">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:layout_above="@+id/editPassword">
+        android:layout_above="@+id/editPassword"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin">
 
         <ScrollView
+            android:id="@+id/scrollView2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/scrollView2" >
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <TextView android:text="@string/configuration_titlle" android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <TextView
                     android:id="@+id/textview"
-                    android:textSize="35sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:textColor="#9e9e9e"
+                    android:layout_gravity="center_horizontal"
                     android:autoText="false"
-                    android:layout_gravity="center_horizontal" />
+                    android:text="@string/configuration_titlle"
+                    android:textColor="#9e9e9e"
+                    android:textSize="35sp" />
 
                 <TableRow
+                    android:id="@+id/TabelaUserName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/TabelaUserName"
                     android:layout_margin="@dimen/activity_horizontal_margin">
 
                     <TextView
+                        android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="Usuario:"
-                        android:id="@+id/textView2" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <EditText
+                        android:id="@+id/editUser"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editUser"
-                        android:hint="@string/user_name"
-                        android:focusable="true"
-                        android:textColorHighlight="#FF4081"
-                        android:textColorHint="#FF4081"
-                        android:inputType="textEmailAddress"
-                        android:textIsSelectable="false"
-                        android:autoText="false"
-                        android:paddingTop="@dimen/activity_vertical_margin"
-                        android:padding="@dimen/activity_horizontal_margin"
                         android:layout_above="@+id/checkBoxTermo"
+                        android:layout_alignEnd="@+id/editPassword"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_alignRight="@+id/editPassword"
-                        android:layout_alignEnd="@+id/editPassword" />
+                        android:autoText="false"
+                        android:focusable="true"
+                        android:hint="@string/user_name"
+                        android:inputType="textEmailAddress"
+                        android:padding="@dimen/activity_horizontal_margin"
+                        android:paddingTop="@dimen/activity_vertical_margin"
+                        android:textColorHighlight="#FF4081"
+                        android:textColorHint="#FF4081"
+                        android:textIsSelectable="false" />
                 </TableRow>
 
                 <TableRow
+                    android:id="@+id/TabelaUserPassword"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/TabelaUserPassword"
                     android:layout_margin="@dimen/activity_horizontal_margin">
 
                     <TextView
+                        android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="Senha:"
-                        android:id="@+id/textView3" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <EditText
+                        android:id="@+id/editPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPassword"
-                        android:ems="10"
-                        android:id="@+id/editPassword"
-                        android:textColorHint="#FF4081"
-                        android:hint="@string/user_password"
-                        android:paddingTop="@dimen/activity_vertical_margin"
-                        android:padding="@dimen/activity_horizontal_margin"
                         android:layout_alignBottom="@+id/checkBoxTermo"
                         android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true" />
+                        android:layout_alignParentStart="true"
+                        android:ems="10"
+                        android:hint="@string/user_password"
+                        android:inputType="textPassword"
+                        android:padding="@dimen/activity_horizontal_margin"
+                        android:paddingTop="@dimen/activity_vertical_margin"
+                        android:textColorHint="#FF4081" />
                 </TableRow>
 
                 <CheckBox
+                    android:id="@+id/checkBoxTermo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/agree_text"
-                    android:id="@+id/checkBoxTermo"
-                    android:checked="false"
-                    android:layout_alignWithParentIfMissing="false"
-                    android:gravity="center_vertical"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
+                    android:layout_alignWithParentIfMissing="false"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
                     android:buttonTint="#FF4081"
+                    android:checked="false"
+                    android:gravity="center_vertical"
 
-                    android:textSize="@dimen/abc_text_size_menu_material"
+                    android:text="@string/agree_text"
                     android:textColorHint="#FF4081"
-                    android:layout_margin="@dimen/activity_horizontal_margin" />
+                    android:textSize="@dimen/abc_text_size_menu_material" />
 
             </LinearLayout>
         </ScrollView>
 
-        <RelativeLayout android:layout_width="fill_parent"
-            android:layout_height="fill_parent" android:gravity="bottom">
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="bottom"
+            android:background="#80FFFFFF"
+            android:id="@+id/Botao">
 
-            <Button
+
+            <ImageButton
+                android:id="@+id/button_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/save_profile"
-                android:drawableLeft="@drawable/ic_account_circle_white_36dp"
-                android:id="@+id/button_back"
-                android:layout_alignParentBottom="true"
+                android:src="@drawable/ic_check_white_48dp"
+                android:background="@drawable/circle_button"
+                android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                android:background="#E91E63"
-                android:textColor="#ffffff"
-                android:textAlignment="center" />
-
+                android:layout_alignParentBottom="true"
+                android:textAlignment="center"
+                android:layout_gravity="center_horizontal" />
         </RelativeLayout>
 
     </LinearLayout>

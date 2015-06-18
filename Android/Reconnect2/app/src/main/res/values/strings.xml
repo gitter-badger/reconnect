@@ -23,13 +23,20 @@
 
     <string name="action_about">Sobre</string>
     <string name="action_feedback">Fale Conosco</string>
-<string name="about_title">Sobre</string>
+    <string name="about_title">Sobre</string>
 
 
 
     <string name="title_button_dialog">Ok</string>
     <string name="alert_dialog">Alerta</string>
     <string name="message_dialog">Opa, voce precisa aceitar o termo do login</string>
+
+
+    <string name="action_notifications">Notificacoes</string>
+    <string name="action_account">Conta</string>
+
+<string name="email_support">gonzales4r@hotmail.com</string>
+    <string name="send_choose">Escolha o cliente</string>
 
     <string name="internet_online">ONLINE</string>
     <string name="internet_offline">OFFLINE</string>

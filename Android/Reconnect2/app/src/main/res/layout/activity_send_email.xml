@@ -61,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="top"
-                android:inputType="textMultiLine|textAutoComplete"
+                android:inputType="text|textMultiLine|textAutoComplete"
                 android:lines="5" />
 
         </LinearLayout>

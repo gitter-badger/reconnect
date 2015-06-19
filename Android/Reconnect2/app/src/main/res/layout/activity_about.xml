@@ -10,7 +10,7 @@ android:background="#f4f4f4" >
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:weightSum="1"
-        android:layout_margin="@dimen/activity_vertical_margin">
+        android:background="#0c000000">
 
         <TextView
             android:layout_width="match_parent"
@@ -24,7 +24,8 @@ android:background="#f4f4f4" >
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_vertical_margin"
             android:layout_marginRight="@dimen/activity_vertical_margin"
-            android:textStyle="bold" />
+            android:textColor="#36000000"
+            android:textStyle="normal|italic" />
 
         <TextView
             android:layout_width="wrap_content"

@@ -40,8 +40,10 @@ public class AboutAppActivity extends ActionBarActivity {
 
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
 
+
         // setting list adapter
         expListView.setAdapter(listAdapter);
+
 
         //setando para expandir na hora de entrar na tela automaticamente
         expListView.expandGroup(0,true);

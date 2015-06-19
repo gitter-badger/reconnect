@@ -1,16 +1,23 @@
 package com.example.peter.reconnect;
 
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class MainActivity extends ActionBarActivity {
@@ -33,7 +40,55 @@ public class MainActivity extends ActionBarActivity {
         //boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
         isConnected(activeNetwork != null && activeNetwork.isConnectedOrConnecting());
 
+
+        ToggleButton toggle = (ToggleButton) findViewById(R.id.buttonStart);
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    teste("Reconnect", "login automatico ligado");
+                } else {
+                    teste("Reconnect", "Autologin desactivado");
+                }
+            }
+        });
+
     }
+
+    private void teste(String title, String text) {
+
+        //Set default notification sound
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.ic_notifications_white_24dp)
+                        .setContentTitle(title)
+                        .setContentText(text).setDefaults(Notification.DEFAULT_VIBRATE).setDefaults(Notification.DEFAULT_SOUND);
+
+// Creates an explicit intent for an Activity in your app
+        Intent resultIntent = new Intent(this, MainActivity.class);
+
+// The stack builder object will contain an artificial back stack for the
+// started Activity.
+// This ensures that navigating backward from the Activity leads out of
+// your application to the Home screen.
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+// Adds the back stack for the Intent (but not the Intent itself)
+        stackBuilder.addParentStack(MainActivity.class);
+// Adds the Intent that starts the Activity to the top of the stack
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(
+                        0,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+        mBuilder.setContentIntent(resultPendingIntent);
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+// mId allows you to update the notification later on.
+        mNotificationManager.notify(1, mBuilder.build());
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -75,6 +130,12 @@ public class MainActivity extends ActionBarActivity {
     // Do ponto de vista técnico, o botão voltar manipula a pilha de Activities do aplicativo.
     // Pressionando o Back Key você finaliza a Activity atual e a remove da pilha. Se o aplicativo tiver apenas uma Activity
     // ou a Activity atual é a única na pilha (o usuário fechou todos as outras) o botão voltar vai fechar o aplicativo.
+
+    @Override
+    protected void onDestroy() {
+        Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
+        super.onDestroy();
+    }
 
     @Override
     public void onBackPressed() {

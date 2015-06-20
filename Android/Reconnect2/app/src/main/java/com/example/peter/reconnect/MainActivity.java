@@ -44,10 +44,15 @@ public class MainActivity extends ActionBarActivity {
         ToggleButton toggle = (ToggleButton) findViewById(R.id.buttonStart);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                Toast.makeText(MainActivity.this, "" + isChecked, Toast.LENGTH_LONG).show();
                 if (isChecked) {
                     teste("Reconnect", "login automatico ligado");
-                } else {
+                    startService(new Intent(getBaseContext(), MyService.class));
+                }
+                if (!isChecked) {
                     teste("Reconnect", "Autologin desactivado");
+                    stopService(new Intent(getBaseContext(), MyService.class));
                 }
             }
         });

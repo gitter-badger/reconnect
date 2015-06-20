@@ -4,89 +4,136 @@
     android:layout_height="match_parent"
     android:id="@+id/NotificationMenu">
 
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/tableRow"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="@dimen/activity_vertical_margin">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView"
+        android:layout_gravity="right">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Vibrar"
-            android:id="@+id/textView6"
-            android:layout_margin="@dimen/activity_vertical_margin" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Switch"
-            android:id="@+id/switch1"
-            android:layout_margin="@dimen/activity_vertical_margin" />
-    </TableRow>
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:id="@+id/tableRow2">
 
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="@dimen/activity_vertical_margin">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Large Text"
+                    android:id="@+id/textView6"
+                    android:layout_margin="@dimen/activity_vertical_margin"
+                    android:gravity="left" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Sound"
-            android:id="@+id/textView9"
-            android:layout_margin="@dimen/activity_vertical_margin" />
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/switch2"
+                    android:layout_margin="@dimen/activity_vertical_margin"
+                    android:textOff="Nao"
+                    android:textOn="Sim"
+                    android:textSize="18sp" />
 
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Switch"
-            android:id="@+id/switch3"
-            android:layout_margin="@dimen/activity_vertical_margin" />
+            </TableRow>
 
-    </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|right"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:id="@+id/tablerow5">
 
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="@dimen/activity_vertical_margin"
-        android:id="@+id/tableRow2">
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sons"
+                    android:id="@+id/switch3"
+                    android:layout_margin="@dimen/activity_vertical_margin"
+                    android:textSize="18sp"
+                    android:textOn="Sim"
+                    android:textOff="Nao" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Notificar"
-            android:id="@+id/textView8"
-            android:layout_margin="@dimen/activity_vertical_margin" />
+            </TableRow>
 
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Notificar"
-            android:id="@+id/switch2"
-            android:layout_margin="@dimen/activity_vertical_margin"
-            android:textOff="Desligar"
-            android:textOn="Ligar" />
-    </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/tableRow6"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/activity_vertical_margin">
 
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vibrar"
+                    android:id="@+id/switch1"
+                    android:layout_margin="@dimen/activity_vertical_margin"
+                    android:textSize="18sp"
+                    android:layout_gravity="right"
+                    android:textOff="Nao"
+                    android:textOn="Sim" />
+            </TableRow>
 
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Switch"
-            android:id="@+id/switch4" />
-    </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/tablerow1">
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Notificar online"
+                    android:id="@+id/switch4"
+                    android:textSize="18sp"
+                    android:layout_gravity="right" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|right"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:id="@+id/tableRow3" >
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Notificar Offline"
+                    android:id="@+id/switch5"
+                    android:layout_margin="@dimen/activity_vertical_margin"
+                    android:textOff="Sim"
+                    android:textOn="Nao"
+                    android:textSize="18sp"
+                    android:layout_gravity="right" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:id="@+id/tableRow4" >
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Notificar"
+                    android:id="@+id/switch6"
+                    android:layout_margin="@dimen/activity_vertical_margin"
+                    android:textOff="Nao"
+                    android:textOn="Sim"
+                    android:textSize="18sp"
+                    android:layout_gravity="right" />
+            </TableRow>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

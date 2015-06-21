@@ -17,10 +17,10 @@ import java.util.List;
  * Created by Peter on 13/06/15.
  */
 public class RequestHttp {
-    private static final String IP = "192.168.35.1/verifica.php";
+    private final String IP = "192.168.35.1/verifica.php";
 
     // Este metodo consiste em enviar um comando POST para o servidor do Senac permitindo o usu�rio logar-se na rede Wifi
-    public static HttpResponse clientHTTP(String username, String passwd, boolean termo) {
+    public HttpResponse clientHTTP(String username, String passwd, boolean termo) {
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(IP);
         HttpResponse response = null;

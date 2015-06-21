@@ -43,6 +43,8 @@
     <string name="internet_state">Verificando internet...</string>
     <string name="agree_errror">Precisa aceitar termo</string>
     <string name="sendMail_label">Enviar Feedback</string>
+    <string name="aviso">Voce foi conectado</string>
+    <string name="titulo">Reconnect</string>
 
 
 </resources>

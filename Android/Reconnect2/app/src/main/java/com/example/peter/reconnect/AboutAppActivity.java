@@ -81,6 +81,7 @@ public class AboutAppActivity extends ActionBarActivity {
      * particular Activity
      */
     protected void setupActionBar() {
+
         final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayUseLogoEnabled(true);

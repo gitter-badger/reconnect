@@ -23,12 +23,12 @@ public class NotificationActivity extends ActionBarActivity {
         setupActionBar();
         settings = getPreferences(MODE_PRIVATE);
         editor = settings.edit();
-        state = (Switch)findViewById(R.id.state);
-        sons = (Switch)findViewById(R.id.sons);
-        vibrar = (Switch)findViewById(R.id.vibra);
-        login = (Switch)findViewById(R.id.login);
-        logout = (Switch)findViewById(R.id.logout);
-        wifi = (Switch)findViewById(R.id.wifi);
+        state = (Switch) findViewById(R.id.state);
+        sons = (Switch) findViewById(R.id.sons);
+        vibrar = (Switch) findViewById(R.id.vibra);
+        login = (Switch) findViewById(R.id.login);
+        logout = (Switch) findViewById(R.id.logout);
+        wifi = (Switch) findViewById(R.id.wifi);
 
         state.setChecked(settings.getBoolean("state", true));
         sons.setChecked(settings.getBoolean("sons", true));

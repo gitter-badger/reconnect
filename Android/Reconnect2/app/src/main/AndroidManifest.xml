@@ -48,7 +48,7 @@
 
         </activity>
         <service
-            android:name=".MyService"
+            android:name=".ReconnectService"
             android:exported="false"/>
         <receiver
             android:name=".NetworkChangeReceiver"

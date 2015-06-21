@@ -40,17 +40,17 @@ public class MainActivity extends ActionBarActivity {
         isConnected(activeNetwork != null && activeNetwork.isConnectedOrConnecting());
 
 
-         buttonStart.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        buttonStart.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Log.i("MainActivity", "" + isChecked);
                 if (isChecked) {
-                    teste("Reconnect", "login automatico ligado");
-                    startService(new Intent(getBaseContext(), MyService.class));
+                    // teste("Reconnect", "login automatico ligado");
+                    startService(new Intent(getBaseContext(), ReconnectService.class));
 
                 }
                 if (!isChecked) {
-                    teste("Reconnect", "Autologin desactivado");
-                    stopService(new Intent(getBaseContext(), MyService.class));
+                    // teste("Reconnect", "Autologin desactivado");
+                    stopService(new Intent(getBaseContext(), ReconnectService.class));
                 }
             }
         });
@@ -60,28 +60,28 @@ public class MainActivity extends ActionBarActivity {
     private void teste(String title, String text) {
         //Set default notification sound
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.ic_notifications_white_24dp).setContentTitle(title)
-                        .setContentText(text).setDefaults(Notification.DEFAULT_VIBRATE)
-                        .setDefaults(Notification.DEFAULT_SOUND);
+                .setSmallIcon(R.drawable.ic_notifications_white_24dp).setContentTitle(title)
+                .setContentText(text).setDefaults(Notification.DEFAULT_VIBRATE)
+                .setDefaults(Notification.DEFAULT_SOUND);
 
-// Creates an explicit intent for an Activity in your app
+        // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(this, MainActivity.class);
 
-// The stack builder object will contain an artificial back stack for the
-// started Activity.
-// This ensures that navigating backward from the Activity leads out of
-// your application to the Home screen.
+        // The stack builder object will contain an artificial back stack for the
+        // started Activity.
+        // This ensures that navigating backward from the Activity leads out of
+        // your application to the Home screen.
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-// Adds the back stack for the Intent (but not the Intent itself)
+        // Adds the back stack for the Intent (but not the Intent itself)
         stackBuilder.addParentStack(MainActivity.class);
-// Adds the Intent that starts the Activity to the top of the stack
+        // Adds the Intent that starts the Activity to the top of the stack
         stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent =
                 stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(resultPendingIntent);
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-// mId allows you to update the notification later on.
+        // mId allows you to update the notification later on.
         mNotificationManager.notify(1, mBuilder.build());
     }
 

@@ -36,7 +36,6 @@ public class MainActivity extends ActionBarActivity {
                 (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        //boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
         isConnected(activeNetwork != null && activeNetwork.isConnectedOrConnecting());
         buttonStart.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -94,7 +93,6 @@ public class MainActivity extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        //int id = item.getItemId();
         switch (item.getItemId()) {
             case R.id.action_account:
                 Intent configIntent = new Intent(MainActivity.this, ConfigurationActivity.class);
@@ -117,18 +115,17 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //configurando o Back-Key:
-    //Funcionalidade do Back Key
-    // Do ponto de vista técnico, o botão voltar manipula a pilha de Activities do aplicativo.
-    // Pressionando o Back Key você finaliza a Activity atual e a remove da pilha. Se o aplicativo tiver apenas uma Activity
-    // ou a Activity atual é a única na pilha (o usuário fechou todos as outras) o botão voltar vai fechar o aplicativo.
-
     @Override
     protected void onDestroy() {
         Log.i("MainActivity", "Service Done");
         super.onDestroy();
     }
 
+    //configurando o Back-Key:
+    //Funcionalidade do Back Key
+    // Do ponto de vista técnico, o botão voltar manipula a pilha de Activities do aplicativo.
+    // Pressionando o Back Key você finaliza a Activity atual e a remove da pilha. Se o aplicativo tiver apenas uma Activity
+    // ou a Activity atual é a única na pilha (o usuário fechou todos as outras) o botão voltar vai fechar o aplicativo.
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -155,5 +152,4 @@ public class MainActivity extends ActionBarActivity {
             internet_message.setText(getString(R.string.internet_offline));
         }
     }
-
 }

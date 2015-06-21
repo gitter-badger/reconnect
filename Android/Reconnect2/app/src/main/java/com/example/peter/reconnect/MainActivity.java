@@ -13,11 +13,11 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class MainActivity extends ActionBarActivity {
@@ -32,7 +32,6 @@ public class MainActivity extends ActionBarActivity {
 
         internet_message = (TextView) findViewById(R.id.text_is_connected);
         buttonStart = (ToggleButton) findViewById(R.id.buttonStart);
-
         ConnectivityManager cm =
                 (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -43,8 +42,7 @@ public class MainActivity extends ActionBarActivity {
 
          buttonStart.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                Toast.makeText(MainActivity.this, "" + isChecked, Toast.LENGTH_LONG).show();
+                Log.i("MainActivity", "" + isChecked);
                 if (isChecked) {
                     teste("Reconnect", "login automatico ligado");
                     startService(new Intent(getBaseContext(), MyService.class));
@@ -60,14 +58,11 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void teste(String title, String text) {
-
         //Set default notification sound
-
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.ic_notifications_white_24dp)
-                        .setContentTitle(title)
-                        .setContentText(text).setDefaults(Notification.DEFAULT_VIBRATE).setDefaults(Notification.DEFAULT_SOUND);
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.ic_notifications_white_24dp).setContentTitle(title)
+                        .setContentText(text).setDefaults(Notification.DEFAULT_VIBRATE)
+                        .setDefaults(Notification.DEFAULT_SOUND);
 
 // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(this, MainActivity.class);
@@ -82,18 +77,13 @@ public class MainActivity extends ActionBarActivity {
 // Adds the Intent that starts the Activity to the top of the stack
         stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent =
-                stackBuilder.getPendingIntent(
-                        0,
-                        PendingIntent.FLAG_UPDATE_CURRENT
-                );
+                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(resultPendingIntent);
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 // mId allows you to update the notification later on.
         mNotificationManager.notify(1, mBuilder.build());
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -138,7 +128,7 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onDestroy() {
-        Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
+        Log.i("MainActivity", "Service Done");
         super.onDestroy();
     }
 

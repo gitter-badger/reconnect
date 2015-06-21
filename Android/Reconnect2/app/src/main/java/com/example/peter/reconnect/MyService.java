@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.Display;
-import android.widget.Toast;
 
 /**
  * Created by Peter on 20/06/15.
@@ -23,15 +22,13 @@ public class MyService extends Service {
 
     @Override
     public void onCreate() {
-        Toast.makeText(this, "service create", Toast.LENGTH_SHORT).show();
-
+        Log.i(TAG, "Service Create");
         isRunning = true;
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
-        Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
+        Log.i(TAG, "Service Starting...");
 
         //Creating new thread for my service
         //Always write your long running tasks in a separate thread, to avoid ANR
@@ -65,15 +62,13 @@ public class MyService extends Service {
 
     @Override
     public IBinder onBind(Intent arg0) {
-        Toast.makeText(this, "service onBind", Toast.LENGTH_SHORT).show();
+        Log.i(TAG, "Service onBind");
         return null;
     }
 
     @Override
     public void onDestroy() {
-
         isRunning = false;
-
-        Toast.makeText(this, "service onDestroy", Toast.LENGTH_SHORT).show();
+        Log.i(TAG, "Service onDestroy");
     }
 }

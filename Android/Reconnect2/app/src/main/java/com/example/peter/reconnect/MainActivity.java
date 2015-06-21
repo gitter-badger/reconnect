@@ -24,6 +24,12 @@ public class MainActivity extends ActionBarActivity {
     // private Button  button_configuration;
     private TextView internet_message;
     private ToggleButton buttonStart;
+    public static final String BOTAO = "botao";
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,22 +45,27 @@ public class MainActivity extends ActionBarActivity {
         //boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
         isConnected(activeNetwork != null && activeNetwork.isConnectedOrConnecting());
 
+    }
 
+    @Override
+    protected void onStart() {
+        // boolean botaoToggle = getIntent().getBooleanExtra(BOTAO, true);
+        //buttonStart.setChecked(botaoToggle);
         buttonStart.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Log.i("MainActivity", "" + isChecked);
                 if (isChecked) {
-                    // teste("Reconnect", "login automatico ligado");
-                    startService(new Intent(getBaseContext(), ReconnectService.class));
+                    teste("Reconnect", "login automatico ligado");
+                    // startService(new Intent(getBaseContext(), ReconnectService.class));
 
                 }
                 if (!isChecked) {
-                    // teste("Reconnect", "Autologin desactivado");
-                    stopService(new Intent(getBaseContext(), ReconnectService.class));
+                    teste("Reconnect", "Autologin desactivado");
+                    //  stopService(new Intent(getBaseContext(), ReconnectService.class));
                 }
             }
         });
-
+        super.onStart();
     }
 
     private void teste(String title, String text) {
@@ -129,6 +140,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onDestroy() {
         Log.i("MainActivity", "Service Done");
+
         super.onDestroy();
     }
 

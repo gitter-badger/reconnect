@@ -1,5 +1,6 @@
 package com.example.peter.reconnect;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -12,6 +13,7 @@ import android.net.NetworkInfo;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.Display;
+import android.widget.Toast;
 
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -21,7 +23,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class ReconnectService extends Service {
     private static final String TAG = "ReconnectService";
-    private ScheduledThreadPoolExecutor poolExecutor;
+    private ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
+    ;
 
     @Override
     public Context createDisplayContext(Display display) {
@@ -37,7 +40,7 @@ public class ReconnectService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i(TAG, "Service Starting...");
 
-        poolExecutor = new ScheduledThreadPoolExecutor(1);
+
         long delayInicial = 0;
         long periodo = 3;
         TimeUnit unit = TimeUnit.MINUTES;
@@ -90,6 +93,7 @@ public class ReconnectService extends Service {
                 http.clientHTTP(emailUser, passwordUser, agreeUser);
 
                 criarNotificacao(emailUser);
+                // showNotification();
 
             } catch (Exception e) {
                 Log.e(getPackageName(), e.getMessage(), e);
@@ -99,11 +103,14 @@ public class ReconnectService extends Service {
         private void criarNotificacao(String usuario) {
 
             int icone = R.drawable.ic_launcher;
-            String aviso = getString(R.string.titulo);
+            String titulo = getString(R.string.titulo);
             long data = System.currentTimeMillis();
-            String titulo = usuario + " " + getString(R.string.aviso);
-            NotificationManager mNotificationManager =
-                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            String aviso = usuario + " " + getString(R.string.aviso);
+
+            Context context = getApplicationContext();
+            Intent intent = new Intent(context, MainActivity.class);
+            intent.putExtra(MainActivity.BOTAO, true);
+
 
             Notification notification = new Notification(icone, aviso, data);
             notification.flags = Notification.FLAG_AUTO_CANCEL;
@@ -113,12 +120,39 @@ public class ReconnectService extends Service {
 
 
             // This pending intent will open after notification click
-            PendingIntent i = PendingIntent.getActivity(ReconnectService.this, 0,
-                    new Intent(ReconnectService.this, MainActivity.class),
-                    0);
-            notification.setLatestEventInfo(ReconnectService.this, aviso,
-                    titulo, i);
-            mNotificationManager.notify(NOTIFY_ME_ID, notification);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, NOTIFY_ME_ID, intent,
+                    Intent.FLAG_ACTIVITY_NEW_TASK);
+            notification.setLatestEventInfo(context, titulo,
+                    aviso, pendingIntent);
+            String ns = Context.NOTIFICATION_SERVICE;
+            NotificationManager notificationManager =
+                    (NotificationManager) getSystemService(ns);
+            notificationManager.notify(NOTIFY_ME_ID, notification);
+        }
+
+        private void showNotification() {
+            // In this sample, we'll use the same text for the ticker and the expanded notification
+            CharSequence text = getText(R.string.titulo);
+
+            // Set the icon, scrolling text and timestamp
+            Notification notification = new Notification(R.drawable.stat_sample, text,
+                    System.currentTimeMillis());
+            Context context = getApplicationContext();
+            // The PendingIntent to launch our activity if the user selects this notification
+            PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
+                    new Intent(ReconnectService.this, MainActivity.class), 0);
+
+            // Set the info for the views that show in the notification panel.
+            notification.setLatestEventInfo(ReconnectService.this, getText(R.string.remote_service_label),
+                    text, contentIntent);
+
+
+            // Send the notification.
+            // We use a string id because it is a unique number.  We use it later to cancel.
+            String ns = Context.NOTIFICATION_SERVICE;
+            NotificationManager mNM =
+                    (NotificationManager) getSystemService(ns);
+            mNM.notify(NOTIFY_ME_ID, notification);
         }
     }
 }

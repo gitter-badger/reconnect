@@ -45,6 +45,7 @@
     <string name="sendMail_label">Enviar Feedback</string>
     <string name="aviso">Voce foi conectado</string>
     <string name="titulo">Reconnect</string>
+    <string name="remote_service_label">teste</string>
 
 
 </resources>

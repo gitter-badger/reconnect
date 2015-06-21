@@ -167,18 +167,13 @@ public class ConfigurationActivity extends ActionBarActivity {
         editor.putString(getString(R.string.key_user_name), nameInput);
         editor.putString(getString(R.string.key_user_password), passwordInput);
         editor.putBoolean(getString(R.string.key_user_agree), checkBoxInput);
-        editor.commit();
-
+        editor.apply();
     }
 
     private void loaderPreferences() {
         //Carrega as preferencias gravadas
         sharedPreferences = getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-
-
-
-
         editUserName.setText(sharedPreferences.getString(getString(R.string.key_user_name), ""));
         editUserPassword.setText(sharedPreferences.getString(getString(R.string.key_user_password), ""));
         checkBoxAgree.setChecked(sharedPreferences.getBoolean(getString(R.string.key_user_agree), false));

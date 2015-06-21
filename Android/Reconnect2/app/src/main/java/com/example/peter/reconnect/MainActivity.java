@@ -49,6 +49,7 @@ public class MainActivity extends ActionBarActivity {
                 if (isChecked) {
                     teste("Reconnect", "login automatico ligado");
                     startService(new Intent(getBaseContext(), MyService.class));
+                     
                 }
                 if (!isChecked) {
                     teste("Reconnect", "Autologin desactivado");

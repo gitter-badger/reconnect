@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class ReconnectService extends Service {
     private static final String TAG = "ReconnectService";
-
+    private ScheduledThreadPoolExecutor poolExecutor;
 
     @Override
     public Context createDisplayContext(Display display) {
@@ -37,13 +37,12 @@ public class ReconnectService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i(TAG, "Service Starting...");
 
-        ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
+        poolExecutor = new ScheduledThreadPoolExecutor(1);
         long delayInicial = 0;
         long periodo = 3;
         TimeUnit unit = TimeUnit.MINUTES;
 
         poolExecutor.scheduleAtFixedRate(new NotificationTask(), delayInicial, periodo, unit);
-
 
         return Service.START_STICKY;
     }
@@ -58,6 +57,9 @@ public class ReconnectService extends Service {
     @Override
     public void onDestroy() {
         Log.i(TAG, "Service onDestroy");
+        poolExecutor.shutdown();
+        stopSelf();
+
     }
 
     private boolean estaConectado() {

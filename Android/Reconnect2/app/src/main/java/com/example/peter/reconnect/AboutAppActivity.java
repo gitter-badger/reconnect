@@ -13,8 +13,6 @@ import java.util.List;
  * Created by Peter on 16/06/15.
  */
 public class AboutAppActivity extends ActionBarActivity {
-
-
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
@@ -32,24 +30,18 @@ public class AboutAppActivity extends ActionBarActivity {
 
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
-
         // preparing list data
         prepareListData();
-
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
-
 
         // setting list adapter
         expListView.setAdapter(listAdapter);
-
-
         //setando para expandir na hora de entrar na tela automaticamente
         expListView.expandGroup(0,true);
         expListView.expandGroup(1,true);
 
         //setando configuracao do action bar
         setupActionBar();
-
     }
 
     /*
@@ -69,22 +61,18 @@ public class AboutAppActivity extends ActionBarActivity {
         top250.add("Pedro Gonzales");
         top250.add("Cleber Matheus da Silda");
 
-
         List<String> nowShowing = new ArrayList<String>();
         nowShowing.add("Contribuidor 1");
         nowShowing.add("Contruibuidor 2");
-
 
         List<String> comingSoon = new ArrayList<String>();
         comingSoon.add("2 Guns");
         comingSoon.add("The Smurfs 2");
 
-
         listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
         listDataChild.put(listDataHeader.get(1), nowShowing);
         listDataChild.put(listDataHeader.get(2), comingSoon);
     }
-
 
     /**
      * This method will setup the top title bar (Action bar) content and display
@@ -93,28 +81,20 @@ public class AboutAppActivity extends ActionBarActivity {
      * particular Activity
      */
     protected void setupActionBar() {
-        
         final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
-
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == android.R.id.home) {
-            finish();
-            return true;
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return true;
         }
-
 
         return super.onOptionsItemSelected(item);
     }

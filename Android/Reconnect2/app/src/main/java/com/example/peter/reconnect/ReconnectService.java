@@ -11,12 +11,16 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.view.Display;
 import android.widget.Toast;
 
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
+import static android.content.Intent.*;
 
 /**
  * Created by Peter on 20/06/15.
@@ -92,8 +96,8 @@ public class ReconnectService extends Service {
                 RequestHttp http = new RequestHttp();
                 http.clientHTTP(emailUser, passwordUser, agreeUser);
 
-                criarNotificacao(emailUser);
-                // showNotification();
+                // criarNotificacao(emailUser);
+                buildNotification("Reconnect", "Logado com sucesso: " + emailUser);
 
             } catch (Exception e) {
                 Log.e(getPackageName(), e.getMessage(), e);
@@ -121,7 +125,7 @@ public class ReconnectService extends Service {
 
             // This pending intent will open after notification click
             PendingIntent pendingIntent = PendingIntent.getActivity(context, NOTIFY_ME_ID, intent,
-                    Intent.FLAG_ACTIVITY_NEW_TASK);
+                    FLAG_ACTIVITY_NEW_TASK);
             notification.setLatestEventInfo(context, titulo,
                     aviso, pendingIntent);
             String ns = Context.NOTIFICATION_SERVICE;
@@ -130,29 +134,37 @@ public class ReconnectService extends Service {
             notificationManager.notify(NOTIFY_ME_ID, notification);
         }
 
-        private void showNotification() {
-            // In this sample, we'll use the same text for the ticker and the expanded notification
-            CharSequence text = getText(R.string.titulo);
-
-            // Set the icon, scrolling text and timestamp
-            Notification notification = new Notification(R.drawable.stat_sample, text,
-                    System.currentTimeMillis());
+        private void buildNotification(String title, String text) {
+            //Set default notification sound
             Context context = getApplicationContext();
-            // The PendingIntent to launch our activity if the user selects this notification
-            PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
-                    new Intent(ReconnectService.this, MainActivity.class), 0);
 
-            // Set the info for the views that show in the notification panel.
-            notification.setLatestEventInfo(ReconnectService.this, getText(R.string.remote_service_label),
-                    text, contentIntent);
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+                    .setSmallIcon(R.drawable.icon).setContentTitle(title)
+                    .setContentText(text).setDefaults(Notification.DEFAULT_VIBRATE)
+                    .setDefaults(Notification.DEFAULT_SOUND).setAutoCancel(true);
+
+            // Creates an explicit intent for an Activity in your app
+            Intent resultIntent = new Intent(context, MainActivity.class);
 
 
-            // Send the notification.
-            // We use a string id because it is a unique number.  We use it later to cancel.
-            String ns = Context.NOTIFICATION_SERVICE;
-            NotificationManager mNM =
-                    (NotificationManager) getSystemService(ns);
-            mNM.notify(NOTIFY_ME_ID, notification);
+            // The stack builder object will contain an artificial back stack for the
+            // started Activity.
+            // This ensures that navigating backward from the Activity leads out of
+            // your application to the Home screen.
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+            // Adds the back stack for the Intent (but not the Intent itself)
+            stackBuilder.addParentStack(MainActivity.class);
+            // Adds the Intent that starts the Activity to the top of the stack
+            stackBuilder.addNextIntent(resultIntent);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, resultIntent,
+                    FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TASK);
+            mBuilder.setContentIntent(pendingIntent);
+
+            NotificationManager mNotificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            // mId allows you to update the notification later on.
+            mNotificationManager.notify(1, mBuilder.build());
         }
+
     }
 }

@@ -18,7 +18,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
+
+import static android.content.Intent.*;
 
 public class MainActivity extends ActionBarActivity {
     // private Button  button_configuration;
@@ -26,15 +29,13 @@ public class MainActivity extends ActionBarActivity {
     private ToggleButton buttonStart;
     public static final String BOTAO = "botao";
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Toast.makeText(this, "" + savedInstanceState.getBoolean("message"), Toast.LENGTH_LONG).show();
 
         internet_message = (TextView) findViewById(R.id.text_is_connected);
         buttonStart = (ToggleButton) findViewById(R.id.buttonStart);
@@ -49,34 +50,51 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onStart() {
-        // boolean botaoToggle = getIntent().getBooleanExtra(BOTAO, true);
-        //buttonStart.setChecked(botaoToggle);
+        super.onStart();
+        Toast.makeText(this, "onStart", Toast.LENGTH_SHORT).show();
+        buttonStart = (ToggleButton) findViewById(R.id.buttonStart);
+
+        Toast.makeText(this, "estado onStart: " + buttonStart.isChecked(), Toast.LENGTH_SHORT).show();
+
         buttonStart.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Log.i("MainActivity", "" + isChecked);
                 if (isChecked) {
-                    teste("Reconnect", "login automatico ligado");
-                    // startService(new Intent(getBaseContext(), ReconnectService.class));
-
+                    teste("Reconnect", "Iniciando Login");
+                    startService(new Intent(getBaseContext(), ReconnectService.class));
                 }
                 if (!isChecked) {
-                    teste("Reconnect", "Autologin desactivado");
-                    //  stopService(new Intent(getBaseContext(), ReconnectService.class));
+                    teste("Reconnect", "Reconnect desligado");
+                    stopService(new Intent(getBaseContext(), ReconnectService.class));
                 }
             }
         });
-        super.onStart();
+
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        buttonStart = (ToggleButton) findViewById(R.id.buttonStart);
+        Toast.makeText(this, "onSaveInstanceState", Toast.LENGTH_SHORT).show();
+        outState.putBoolean("message", buttonStart.isChecked());
+        Toast.makeText(this, "isto foi salvo: " + buttonStart.isChecked(), Toast.LENGTH_SHORT).show();
+
+
+    }
+
 
     private void teste(String title, String text) {
         //Set default notification sound
+
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.ic_notifications_white_24dp).setContentTitle(title)
+                .setSmallIcon(R.drawable.icon).setContentTitle(title)
                 .setContentText(text).setDefaults(Notification.DEFAULT_VIBRATE)
-                .setDefaults(Notification.DEFAULT_SOUND);
+                .setDefaults(Notification.DEFAULT_SOUND).setAutoCancel(true);
 
         // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(this, MainActivity.class);
+
 
         // The stack builder object will contain an artificial back stack for the
         // started Activity.
@@ -87,9 +105,10 @@ public class MainActivity extends ActionBarActivity {
         stackBuilder.addParentStack(MainActivity.class);
         // Adds the Intent that starts the Activity to the top of the stack
         stackBuilder.addNextIntent(resultIntent);
-        PendingIntent resultPendingIntent =
-                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-        mBuilder.setContentIntent(resultPendingIntent);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, resultIntent,
+                FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TASK);
+        mBuilder.setContentIntent(pendingIntent);
+
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         // mId allows you to update the notification later on.
@@ -137,12 +156,6 @@ public class MainActivity extends ActionBarActivity {
     // Pressionando o Back Key você finaliza a Activity atual e a remove da pilha. Se o aplicativo tiver apenas uma Activity
     // ou a Activity atual é a única na pilha (o usuário fechou todos as outras) o botão voltar vai fechar o aplicativo.
 
-    @Override
-    protected void onDestroy() {
-        Log.i("MainActivity", "Service Done");
-
-        super.onDestroy();
-    }
 
     @Override
     public void onBackPressed() {

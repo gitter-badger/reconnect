@@ -113,7 +113,6 @@ public class ReconnectService extends Service {
 
             Context context = getApplicationContext();
             Intent intent = new Intent(context, MainActivity.class);
-            intent.putExtra(MainActivity.BOTAO, true);
 
 
             Notification notification = new Notification(icone, aviso, data);

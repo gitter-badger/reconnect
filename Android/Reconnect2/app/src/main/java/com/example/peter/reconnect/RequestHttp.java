@@ -4,6 +4,7 @@ import android.util.Log;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -24,6 +25,7 @@ public class RequestHttp {
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(IP);
         HttpResponse response = null;
+        StatusLine statusLine;
         List<NameValuePair> pairs = new ArrayList<>();
 
         pairs.add(new BasicNameValuePair("user", username));
@@ -44,10 +46,16 @@ public class RequestHttp {
         try {
             post.setEntity(new UrlEncodedFormEntity(pairs));
             response = client.execute(post);
-            Log.d("Http Post Response:", response.toString());
+          Log.d("Http Post Response:", response.toString());
+          //  statusLine = response.getStatusLine();
+           // Log.d("Http Post Response:", "code: " + statusLine.getStatusCode());
+
         } catch (Exception e) {
             e.printStackTrace();
+//            statusLine = response.getStatusLine();
+         //   Log.d("Http Post Response:", "code: " + statusLine.getStatusCode());
         }
+       // Log.d("Http Post Response:", "code: " + statusLine.getStatusCode());
         return response;
     }
 }

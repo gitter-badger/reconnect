@@ -9,25 +9,27 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.ActionBarActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import static android.content.Intent.*;
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class MainActivity extends ActionBarActivity {
     // private Button  button_configuration;
-    private TextView internet_message;
+    private TextView internet_message, nameSSID;
     private ToggleButton buttonStart;
-    public static final String BOTAO = "botao";
 
 
     @Override
@@ -35,10 +37,10 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Toast.makeText(this, "" + savedInstanceState.getBoolean("message"), Toast.LENGTH_LONG).show();
-
+        Context context = getApplicationContext();
         internet_message = (TextView) findViewById(R.id.text_is_connected);
         buttonStart = (ToggleButton) findViewById(R.id.buttonStart);
+        nameSSID = (TextView) findViewById(R.id.textNameSSID);
         ConnectivityManager cm =
                 (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -46,16 +48,13 @@ public class MainActivity extends ActionBarActivity {
         //boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
         isConnected(activeNetwork != null && activeNetwork.isConnectedOrConnecting());
 
+        nameSSID.setText(getCurrentSsid(context));
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Toast.makeText(this, "onStart", Toast.LENGTH_SHORT).show();
         buttonStart = (ToggleButton) findViewById(R.id.buttonStart);
-
-        Toast.makeText(this, "estado onStart: " + buttonStart.isChecked(), Toast.LENGTH_SHORT).show();
-
         buttonStart.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Log.i("MainActivity", "" + isChecked);
@@ -71,18 +70,6 @@ public class MainActivity extends ActionBarActivity {
         });
 
     }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        buttonStart = (ToggleButton) findViewById(R.id.buttonStart);
-        Toast.makeText(this, "onSaveInstanceState", Toast.LENGTH_SHORT).show();
-        outState.putBoolean("message", buttonStart.isChecked());
-        Toast.makeText(this, "isto foi salvo: " + buttonStart.isChecked(), Toast.LENGTH_SHORT).show();
-
-
-    }
-
 
     private void teste(String title, String text) {
         //Set default notification sound
@@ -184,4 +171,26 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    public String getWifiName(Context context) {
+        String ssid = "none";
+        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        if (WifiInfo.getDetailedStateOf(wifiInfo.getSupplicantState()) == NetworkInfo.DetailedState.CONNECTED) {
+            ssid = wifiInfo.getSSID();
+        }
+        return ssid;
+    }
+    public static String getCurrentSsid(Context context) {
+        String ssid = null;
+        ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        if (networkInfo.isConnected()) {
+            final WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+            final WifiInfo connectionInfo = wifiManager.getConnectionInfo();
+            if (connectionInfo != null && !TextUtils.isEmpty(connectionInfo.getSSID())) {
+                ssid = connectionInfo.getSSID();
+            }
+        }
+        return ssid;
+    }
 }

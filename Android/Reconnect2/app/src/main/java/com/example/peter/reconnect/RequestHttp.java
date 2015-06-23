@@ -46,16 +46,16 @@ public class RequestHttp {
         try {
             post.setEntity(new UrlEncodedFormEntity(pairs));
             response = client.execute(post);
-          Log.d("Http Post Response:", response.toString());
-          //  statusLine = response.getStatusLine();
-           // Log.d("Http Post Response:", "code: " + statusLine.getStatusCode());
+            Log.d("Http Post Response:", response.toString());
+            //  statusLine = response.getStatusLine();
+            // Log.d("Http Post Response:", "code: " + statusLine.getStatusCode());
 
         } catch (Exception e) {
             e.printStackTrace();
 //            statusLine = response.getStatusLine();
-         //   Log.d("Http Post Response:", "code: " + statusLine.getStatusCode());
+            //   Log.d("Http Post Response:", "code: " + statusLine.getStatusCode());
         }
-       // Log.d("Http Post Response:", "code: " + statusLine.getStatusCode());
+        // Log.d("Http Post Response:", "code: " + statusLine.getStatusCode());
         return response;
     }
 }

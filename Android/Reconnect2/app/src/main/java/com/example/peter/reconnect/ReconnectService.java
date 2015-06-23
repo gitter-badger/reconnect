@@ -28,16 +28,17 @@ import static android.content.Intent.*;
 public class ReconnectService extends Service {
     private static final String TAG = "ReconnectService";
     private ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
-    ;
 
     @Override
     public Context createDisplayContext(Display display) {
         return super.createDisplayContext(display);
+
     }
 
     @Override
     public void onCreate() {
         Log.i(TAG, "Service Create");
+
     }
 
     @Override
@@ -46,10 +47,11 @@ public class ReconnectService extends Service {
 
 
         long delayInicial = 0;
-        long periodo = 3;
+        long periodo = 2;
         TimeUnit unit = TimeUnit.MINUTES;
 
         poolExecutor.scheduleAtFixedRate(new NotificationTask(), delayInicial, periodo, unit);
+
 
         return Service.START_STICKY;
     }
@@ -64,9 +66,8 @@ public class ReconnectService extends Service {
     @Override
     public void onDestroy() {
         Log.i(TAG, "Service onDestroy");
-        poolExecutor.shutdown();
+        poolExecutor.shutdownNow();
         stopSelf();
-
     }
 
     private boolean estaConectado() {

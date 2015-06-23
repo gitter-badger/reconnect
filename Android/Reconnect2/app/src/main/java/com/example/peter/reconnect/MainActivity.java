@@ -75,12 +75,12 @@ public class MainActivity extends ActionBarActivity {
                     if (userName.length() <= 0 && userPass.length() <= 0) {
                         buildDialog();
                         buttonStart.setChecked(false);
-                        return;
+                    } else {
+                        buildNotification("Reconnect", "Iniciando Login");
+                        startService(new Intent(getBaseContext(), ReconnectService.class));
                     }
-                    buildNotification("Reconnect", "Iniciando Login");
-                    startService(new Intent(getBaseContext(), ReconnectService.class));
                 }
-                if (!isChecked) {
+              else  if   (!isChecked) {
                     buildNotification("Reconnect", "Reconnect desligado");
                     stopService(new Intent(getBaseContext(), ReconnectService.class));
                 }

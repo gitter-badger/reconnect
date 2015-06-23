@@ -1,5 +1,6 @@
 package com.example.peter.reconnect;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -21,7 +22,7 @@ public class NotificationActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
         setupActionBar();
-        settings = getPreferences(MODE_PRIVATE);
+        settings = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         editor = settings.edit();
         state = (Switch) findViewById(R.id.state);
         sons = (Switch) findViewById(R.id.sons);

@@ -96,7 +96,6 @@ public class ReconnectService extends Service {
                 RequestHttp http = new RequestHttp();
                 http.clientHTTP(emailUser, passwordUser, agreeUser);
 
-                // criarNotificacao(emailUser);
                 buildNotification("Reconnect", "Logado com sucesso: " + emailUser);
 
             } catch (Exception e) {
@@ -140,7 +139,7 @@ public class ReconnectService extends Service {
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
                     .setSmallIcon(R.drawable.icon).setContentTitle(title)
                     .setContentText(text).setDefaults(Notification.DEFAULT_VIBRATE)
-                    .setDefaults(Notification.DEFAULT_SOUND).setAutoCancel(true);
+                    .setDefaults(Notification.DEFAULT_SOUND).setDefaults(Notification.DEFAULT_LIGHTS).setAutoCancel(true);
 
             // Creates an explicit intent for an Activity in your app
             Intent resultIntent = new Intent(context, MainActivity.class);
@@ -155,14 +154,14 @@ public class ReconnectService extends Service {
             stackBuilder.addParentStack(MainActivity.class);
             // Adds the Intent that starts the Activity to the top of the stack
             stackBuilder.addNextIntent(resultIntent);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, resultIntent,
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, NOTIFY_ME_ID, resultIntent,
                     FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TASK);
             mBuilder.setContentIntent(pendingIntent);
 
             NotificationManager mNotificationManager =
                     (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             // mId allows you to update the notification later on.
-            mNotificationManager.notify(1, mBuilder.build());
+            mNotificationManager.notify(NOTIFY_ME_ID, mBuilder.build());
         }
 
     }

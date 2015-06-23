@@ -137,8 +137,7 @@ public class ConfigurationActivity extends ActionBarActivity {
                 final boolean agreeTerm = checkBoxAgree.isChecked();
 
                 if (!agreeTerm) {
-                    checkBoxAgree.setError(getString(R.string.agree_errror));
-                    // buildDialogOneButton(getString(R.string.alert_dialog), getString(R.string.message_dialog), getString(R.string.title_button_dialog));
+                    Toast.makeText(ConfigurationActivity.this, getString(R.string.agree_errror), Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -168,6 +167,7 @@ public class ConfigurationActivity extends ActionBarActivity {
         editor.putString(getString(R.string.key_user_password), passwordInput);
         editor.putBoolean(getString(R.string.key_user_agree), checkBoxInput);
         editor.apply();
+        //Toast.makeText(ConfigurationActivity.this, "Salvando Configurações", Toast.LENGTH_SHORT).show();
     }
 
     private void loaderPreferences() {

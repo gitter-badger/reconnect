@@ -33,6 +33,7 @@ public class MainActivity extends ActionBarActivity {
     private ToggleButton buttonStart;
     private String userName, userPass;
     private boolean userAgree;
+    private static final int NOTIFY_ME_ID = 1337;
 
 
     @Override
@@ -59,6 +60,8 @@ public class MainActivity extends ActionBarActivity {
     protected void onDestroy() {
         super.onDestroy();
         stopService(new Intent(getBaseContext(), ReconnectService.class));
+        Log.i("Reconnect Main Activity", "onDestroy, exit app...");
+
     }
 
     @Override
@@ -114,7 +117,7 @@ public class MainActivity extends ActionBarActivity {
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         // mId allows you to update the notification later on.
-        mNotificationManager.notify(1, mBuilder.build());
+        mNotificationManager.notify(NOTIFY_ME_ID, mBuilder.build());
     }
 
     @Override
@@ -228,6 +231,7 @@ public class MainActivity extends ActionBarActivity {
         });
         builder.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
+                return;
             }
         });
         AlertDialog alerta = builder.create();

@@ -47,7 +47,7 @@ public class ReconnectService extends Service {
 
 
         long delayInicial = 0;
-        long periodo = 2;
+        long periodo = 3;
         TimeUnit unit = TimeUnit.MINUTES;
 
         poolExecutor.scheduleAtFixedRate(new NotificationTask(), delayInicial, periodo, unit);

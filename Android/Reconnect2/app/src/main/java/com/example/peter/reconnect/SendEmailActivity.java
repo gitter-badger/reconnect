@@ -6,15 +6,16 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * Created by Peter on 16/06/15.
  */
 public class SendEmailActivity extends ActionBarActivity {
 
-    EditText textEmail;
     EditText textSubject;
     EditText textMessage;
+    EditText textName;
 
 
     @Override
@@ -24,6 +25,7 @@ public class SendEmailActivity extends ActionBarActivity {
         setupActionBar();
         textSubject = (EditText) findViewById(R.id.textSuject);
         textMessage = (EditText) findViewById(R.id.textMessageEmail);
+        textName = (EditText) findViewById(R.id.textNameUserEmail);
 
 
     }
@@ -65,6 +67,20 @@ public class SendEmailActivity extends ActionBarActivity {
         String to = getString(R.string.email_support);
         String subject = textSubject.getText().toString();
         String message = textMessage.getText().toString();
+        String name = textName.getText().toString();
+
+
+        if (subject.length() <= 0) {
+            Toast.makeText(SendEmailActivity.this, "Precisa inserir asunto", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (name.length() <= 0) {
+            Toast.makeText(SendEmailActivity.this, "Precisa inserir um nome", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (message.length() <= 0) {
+            Toast.makeText(SendEmailActivity.this, "Precisa inserir alguma mensagem", Toast.LENGTH_SHORT).show();
+            return;
+
+        }
 
         Intent email = new Intent(Intent.ACTION_SEND);
         email.putExtra(Intent.EXTRA_EMAIL, new String[]{to});

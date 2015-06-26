@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Reconnect</string>
+    <string name="app_name">Logininja</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Configuração</string>
     <string name="configuration_titlle">Login</string>
     <string name="user_name">E-mail</string>
     <string name="user_password">Senha</string>
-    <string name="footer"> Copyright \u00A9 Reconnect 2015</string>
+    <string name="footer"> Copyright \u00A9 Logininja 2015</string>
     <string name="title_home">RECONNECT</string>
     <string name="preference_file_key">com.example.reconnect.PREFERENCE_RECONNECT_KEY</string>
     <string name="key_user_name">nameKey</string>

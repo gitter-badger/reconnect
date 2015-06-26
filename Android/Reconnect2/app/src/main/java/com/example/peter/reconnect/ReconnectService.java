@@ -66,6 +66,7 @@ public class ReconnectService extends Service {
     @Override
     public void onDestroy() {
         Log.i(TAG, "Service onDestroy");
+        poolExecutor.shutdown();
         poolExecutor.shutdownNow();
         stopSelf();
     }

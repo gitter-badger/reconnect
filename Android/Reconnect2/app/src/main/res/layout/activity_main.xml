@@ -20,7 +20,7 @@
         android:layout_marginBottom="126dp"
         android:text="Ligar Reconnect"
         android:textOff="LIGAR"
-        android:textOn="Desligar"
+        android:textOn="DESLIGAR"
         android:textSize="15sp"
         android:background="@color/pink_500"
         android:textColor="#ffffff"

@@ -49,7 +49,6 @@ public class MainActivity extends ActionBarActivity {
                 (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        //boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
         isConnected(activeNetwork != null && activeNetwork.isConnectedOrConnecting());
 
         nameSSID.setText(getCurrentSsid(context));
@@ -79,8 +78,7 @@ public class MainActivity extends ActionBarActivity {
                         buildNotification("Reconnect", "Iniciando Login");
                         startService(new Intent(getBaseContext(), ReconnectService.class));
                     }
-                }
-              else  if   (!isChecked) {
+                } else if (!isChecked) {
                     buildNotification("Reconnect", "Reconnect desligado");
                     stopService(new Intent(getBaseContext(), ReconnectService.class));
                 }

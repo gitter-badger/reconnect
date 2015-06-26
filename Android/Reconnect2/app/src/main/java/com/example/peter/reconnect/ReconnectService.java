@@ -105,43 +105,35 @@ public class ReconnectService extends Service {
             }
         }
 
-        private void criarNotificacao(String usuario) {
-
-            int icone = R.drawable.ic_launcher;
-            String titulo = getString(R.string.titulo);
-            long data = System.currentTimeMillis();
-            String aviso = usuario + " " + getString(R.string.aviso);
-
-            Context context = getApplicationContext();
-            Intent intent = new Intent(context, MainActivity.class);
-
-
-            Notification notification = new Notification(icone, aviso, data);
-            notification.flags = Notification.FLAG_AUTO_CANCEL;
-            notification.defaults |= Notification.DEFAULT_VIBRATE;
-            notification.defaults |= Notification.DEFAULT_LIGHTS;
-            notification.defaults |= Notification.DEFAULT_SOUND;
-
-
-            // This pending intent will open after notification click
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, NOTIFY_ME_ID, intent,
-                    FLAG_ACTIVITY_NEW_TASK);
-            notification.setLatestEventInfo(context, titulo,
-                    aviso, pendingIntent);
-            String ns = Context.NOTIFICATION_SERVICE;
-            NotificationManager notificationManager =
-                    (NotificationManager) getSystemService(ns);
-            notificationManager.notify(NOTIFY_ME_ID, notification);
-        }
-
         private void buildNotification(String title, String text) {
+
+            boolean sound;
+            boolean vibrate;
+            boolean whiteLight;
+            SharedPreferences sharedPreferences = getSharedPreferences(
+                    getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+            sound = sharedPreferences.getBoolean("sons", true);
+            vibrate = sharedPreferences.getBoolean("vibra", true);
+            whiteLight = sharedPreferences.getBoolean("whiteLight", true);
+
             //Set default notification sound
             Context context = getApplicationContext();
 
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
                     .setSmallIcon(R.drawable.icon).setContentTitle(title)
-                    .setContentText(text).setDefaults(Notification.DEFAULT_VIBRATE)
-                    .setDefaults(Notification.DEFAULT_SOUND).setDefaults(Notification.DEFAULT_LIGHTS).setAutoCancel(true);
+                    .setContentText(text)
+                    .setAutoCancel(true);
+
+            if (sound) {
+                mBuilder.setDefaults(Notification.DEFAULT_SOUND);
+            }
+            if (vibrate) {
+                mBuilder.setDefaults(Notification.DEFAULT_VIBRATE);
+            }
+            if (whiteLight) {
+                mBuilder.setDefaults(Notification.DEFAULT_LIGHTS);
+            }
+
 
             // Creates an explicit intent for an Activity in your app
             Intent resultIntent = new Intent(context, MainActivity.class);

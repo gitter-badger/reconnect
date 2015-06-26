@@ -76,7 +76,7 @@ public class NotificationActivity extends ActionBarActivity {
         wifi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                editor.putBoolean("wifi", isChecked);
+                editor.putBoolean("whiteLight", isChecked);
                 editor.apply();
             }
         });

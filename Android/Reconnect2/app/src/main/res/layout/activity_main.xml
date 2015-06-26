@@ -65,7 +65,8 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@id/avatarImageView"
                         android:paddingLeft="4dp"
-                        android:text="Internet"></TextView>
+                        android:text="Internet"
+                        android:textSize="15sp"></TextView>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -87,7 +88,8 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/imageView"
                         android:paddingLeft="4dp"
-                        android:text="Logado com sucesso" />
+                        android:text="Logado com sucesso"
+                        android:textSize="15sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -109,7 +111,8 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/imageView2"
                         android:paddingLeft="4dp"
-                        android:text="Conectado ao Senac" />
+                        android:text="Conectado ao Senac"
+                        android:textSize="15sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -131,7 +134,8 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/imageView3"
                         android:paddingLeft="4dp"
-                        android:text="Configuração" />
+                        android:text="Configuração"
+                        android:textSize="15sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -153,7 +157,8 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/imageView4"
                         android:paddingLeft="4dp"
-                        android:text="Nome da rede:" />
+                        android:text="Nome da rede:"
+                        android:textSize="15sp" />
                 </RelativeLayout>
             </LinearLayout>
         </ScrollView>

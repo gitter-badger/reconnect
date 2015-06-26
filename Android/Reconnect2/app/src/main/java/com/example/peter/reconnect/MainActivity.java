@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
@@ -21,6 +23,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -32,8 +35,9 @@ public class MainActivity extends ActionBarActivity {
     private TextView internet_message, nameSSID;
     private ToggleButton buttonStart;
     private String userName, userPass;
-    private boolean userAgree;
     private static final int NOTIFY_ME_ID = 1337;
+    private ImageView avatarCheckInternet;
+    private boolean userAgree;
 
 
     @Override
@@ -45,16 +49,14 @@ public class MainActivity extends ActionBarActivity {
         internet_message = (TextView) findViewById(R.id.text_is_connected);
         buttonStart = (ToggleButton) findViewById(R.id.buttonStart);
         nameSSID = (TextView) findViewById(R.id.textNameSSID);
-        ConnectivityManager cm =
-                (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        //boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
-        isConnected(activeNetwork != null && activeNetwork.isConnectedOrConnecting());
 
         nameSSID.setText(getCurrentSsid(context));
+        avatarCheckInternet = (ImageView) findViewById(R.id.avatarCheckInternet);
+
         loaderPreferences();
+
     }
+
 
     @Override
     protected void onDestroy() {
@@ -79,8 +81,7 @@ public class MainActivity extends ActionBarActivity {
                         buildNotification("Reconnect", "Iniciando Login");
                         startService(new Intent(getBaseContext(), ReconnectService.class));
                     }
-                }
-              else  if   (!isChecked) {
+                } else if (!isChecked) {
                     buildNotification("Reconnect", "Reconnect desligado");
                     stopService(new Intent(getBaseContext(), ReconnectService.class));
                 }
@@ -89,35 +90,10 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    private void buildNotification(String title, String text) {
-        //Set default notification sound
-
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.icon).setContentTitle(title)
-                .setContentText(text).setDefaults(Notification.DEFAULT_VIBRATE)
-                .setDefaults(Notification.DEFAULT_SOUND).setAutoCancel(true);
-
-        // Creates an explicit intent for an Activity in your app
-        Intent resultIntent = new Intent(this, MainActivity.class);
-
-        //resultIntent.setFlags(FLAG_ACTIVITY_NEW_TASK);
-        // The stack builder object will contain an artificial back stack for the
-        // started Activity.
-        // This ensures that navigating backward from the Activity leads out of
-        // your application to the Home screen.
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        // Adds the back stack for the Intent (but not the Intent itself)
-        stackBuilder.addParentStack(MainActivity.class);
-        // Adds the Intent that starts the Activity to the top of the stack
-        stackBuilder.addNextIntent(resultIntent);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, resultIntent,
-                FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TASK);
-        mBuilder.setContentIntent(pendingIntent);
-
-        NotificationManager mNotificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        // mId allows you to update the notification later on.
-        mNotificationManager.notify(NOTIFY_ME_ID, mBuilder.build());
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loaderPreferences();
     }
 
     @Override
@@ -180,20 +156,6 @@ public class MainActivity extends ActionBarActivity {
         alerta.show();
     }
 
-    private void isConnected(boolean isConnected) {
-        if (isConnected) {
-            internet_message.setText(getString(R.string.internet_online));
-        }
-        if (!isConnected) {
-            internet_message.setText(getString(R.string.internet_offline));
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        loaderPreferences();
-    }
 
     private void loaderPreferences() {
         //Carrega as preferencias gravadas
@@ -218,6 +180,38 @@ public class MainActivity extends ActionBarActivity {
         return ssid;
     }
 
+    private void buildNotification(String title, String text) {
+        //Set default notification sound
+
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.icon);
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this).setSmallIcon(R.id.icon)
+                .setLargeIcon(largeIcon).setContentTitle(title)
+                .setContentText(text).setDefaults(Notification.DEFAULT_VIBRATE)
+                .setDefaults(Notification.DEFAULT_SOUND).setAutoCancel(true);
+
+        // Creates an explicit intent for an Activity in your app
+        Intent resultIntent = new Intent(this, MainActivity.class);
+        //resultIntent.setFlags(FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TASK);
+
+        // The stack builder object will contain an artificial back stack for the
+        // started Activity.
+        // This ensures that navigating backward from the Activity leads out of
+        // your application to the Home screen.
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        // Adds the back stack for the Intent (but not the Intent itself)
+        stackBuilder.addParentStack(MainActivity.class);
+        // Adds the Intent that starts the Activity to the top of the stack
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, resultIntent,
+                FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TASK);
+        mBuilder.setContentIntent(pendingIntent);
+
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        // mId allows you to update the notification later on.
+        mNotificationManager.notify(NOTIFY_ME_ID, mBuilder.build());
+    }
+
     private void buildDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Opa!");
@@ -237,4 +231,6 @@ public class MainActivity extends ActionBarActivity {
         AlertDialog alerta = builder.create();
         alerta.show();
     }
+
 }
+

@@ -37,8 +37,8 @@ public class AboutAppActivity extends ActionBarActivity {
         // setting list adapter
         expListView.setAdapter(listAdapter);
         //setando para expandir na hora de entrar na tela automaticamente
-        expListView.expandGroup(0,true);
-        expListView.expandGroup(1,true);
+        expListView.expandGroup(0, true);
+        expListView.expandGroup(1, true);
 
         //setando configuracao do action bar
         setupActionBar();
@@ -54,7 +54,7 @@ public class AboutAppActivity extends ActionBarActivity {
         // Adding child data
         listDataHeader.add("Autores");
         listDataHeader.add("Contribuidores");
-        listDataHeader.add("Coming Soon..");
+        //listDataHeader.add("Coming Soon..");
 
         // Adding child data
         List<String> top250 = new ArrayList<String>();
@@ -62,16 +62,16 @@ public class AboutAppActivity extends ActionBarActivity {
         top250.add("Cleber Matheus da Silda");
 
         List<String> nowShowing = new ArrayList<String>();
-        nowShowing.add("Contribuidor 1");
-        nowShowing.add("Contruibuidor 2");
+        nowShowing.add("Guilherme Dariolli ");
+        //nowShowing.add("Contruibuidor 2");
 
-        List<String> comingSoon = new ArrayList<String>();
+      /*  List<String> comingSoon = new ArrayList<String>();
         comingSoon.add("2 Guns");
-        comingSoon.add("The Smurfs 2");
+        comingSoon.add("The Smurfs 2");*/
 
         listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
         listDataChild.put(listDataHeader.get(1), nowShowing);
-        listDataChild.put(listDataHeader.get(2), comingSoon);
+        //listDataChild.put(listDataHeader.get(2), comingSoon);
     }
 
     /**
@@ -91,7 +91,7 @@ public class AboutAppActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;

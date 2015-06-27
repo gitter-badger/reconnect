@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/indigo_500" >
+    android:background="@drawable/splash" >
 
     <TextView
         android:layout_width="fill_parent"
@@ -11,7 +11,7 @@
         android:layout_marginBottom="10dp"
         android:gravity="center_horizontal"
         android:text="@string/footer"
-        android:textColor="#E8EAF6"
+        android:textColor="@color/indigo_500"
         android:textSize="@dimen/abc_text_size_medium_material" />
 
 </RelativeLayout>

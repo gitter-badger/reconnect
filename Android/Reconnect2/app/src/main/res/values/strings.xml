@@ -20,6 +20,7 @@
     <string name="invalid_password">Precisa inserir uma senha</string>
     <string name="invalid_username" >E-mail Invalido</string>
 
+    <string name="action_share">Indicar para um amigo</string>
 
     <string name="action_about">Sobre</string>
     <string name="action_feedback">Fale Conosco</string>

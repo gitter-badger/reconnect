@@ -1,6 +1,5 @@
 package com.example.peter.reconnect;
 
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -15,7 +14,6 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.view.Display;
-import android.widget.Toast;
 
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -26,7 +24,7 @@ import static android.content.Intent.*;
  * Created by Peter on 20/06/15.
  */
 public class ReconnectService extends Service {
-    private static final String TAG = "ReconnectService";
+    private static final String TAG = "LogininjaService";
     private ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
 
     @Override
@@ -98,7 +96,7 @@ public class ReconnectService extends Service {
                 RequestHttp http = new RequestHttp();
                 http.clientHTTP(emailUser, passwordUser, agreeUser);
 
-                buildNotification("Reconnect", "Logado com sucesso: " + emailUser);
+                buildNotification("Logininja", "Logado com sucesso: " + emailUser);
 
             } catch (Exception e) {
                 Log.e(getPackageName(), e.getMessage(), e);
@@ -120,7 +118,7 @@ public class ReconnectService extends Service {
             Context context = getApplicationContext();
 
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-                    .setSmallIcon(R.drawable.icon).setContentTitle(title)
+                    .setSmallIcon(R.drawable.ic_launcher).setContentTitle(title)
                     .setContentText(text)
                     .setAutoCancel(true);
 

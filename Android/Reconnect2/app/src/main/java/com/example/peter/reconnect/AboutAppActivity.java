@@ -63,7 +63,7 @@ public class AboutAppActivity extends ActionBarActivity {
 
         List<String> nowShowing = new ArrayList<String>();
         nowShowing.add("Guilherme Dariolli ");
-        //nowShowing.add("Contruibuidor 2");
+        nowShowing.add("Cristian Yano Yoshiaki ");
 
       /*  List<String> comingSoon = new ArrayList<String>();
         comingSoon.add("2 Guns");

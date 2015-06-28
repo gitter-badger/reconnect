@@ -17,6 +17,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -42,7 +43,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+ 
         Context context = getApplicationContext();
         internet_message = (TextView) findViewById(R.id.text_is_connected);
         buttonStart = (ToggleButton) findViewById(R.id.buttonStart);
@@ -62,7 +63,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onDestroy() {
         super.onDestroy();
         stopService(new Intent(getBaseContext(), ReconnectService.class));
-        Log.i("Reconnect Main Activity", "onDestroy, exit app...");
+        Log.i("Logininja Main Activity", "onDestroy, exit app...");
 
     }
 
@@ -85,12 +86,12 @@ public class MainActivity extends ActionBarActivity {
                         buildDialog();
                         buttonStart.setChecked(false);
                     } else {
-                        buildNotification("Reconnect", "Iniciando Login");
+                        buildNotification("Logininja", "Iniciando Login");
                         startService(new Intent(getBaseContext(), ReconnectService.class));
                     }
                 } else if (!isChecked) {
                     if (stateOff) {
-                        buildNotification("Reconnect", "Reconnect desligado");
+                        buildNotification("Logininja", "Reconnect desligado");
                     }
                     stopService(new Intent(getBaseContext(), ReconnectService.class));
                 }
@@ -174,6 +175,7 @@ public class MainActivity extends ActionBarActivity {
         loaderPreferences();
     }
 
+
     private void buildNotification(String title, String text) {
         boolean sound;
         boolean vibrate;
@@ -186,10 +188,10 @@ public class MainActivity extends ActionBarActivity {
 
 
         //Set default notification sound
-        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.icon);
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.icon).setContentTitle(title)
+                .setSmallIcon(R.drawable.ic_launcher).setContentTitle(title)
                 .setContentText(text)
                 .setAutoCancel(true);
 
